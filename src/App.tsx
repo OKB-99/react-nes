@@ -2,6 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Grid, Input, Button, Slider, IconButton } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { VolumeUp, Keyboard } from '@mui/icons-material';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { faGamepad } from '@fortawesome/fontawesome-free-solid';
 import './App.css';
 import { NES } from './nes';
 
@@ -84,9 +87,12 @@ const App: React.FC = () => {
             <Grid size={3}>
               <Slider id="volumeSlider" hidden min={0} max={1} step={0.1} value={volume} onChange={volumeOnChange}></Slider>
             </Grid>
-            <Grid size={1}>
+            <Grid size={1} display={"flex"} style={{ marginLeft: '1vw' }}>
               <IconButton color="primary">
                 <Keyboard fontSize="large" />
+              </IconButton>
+              <IconButton color="primary" disabled>
+                <FontAwesomeIcon icon={faGamepad as IconProp} />
               </IconButton>
             </Grid>
           </Grid>
