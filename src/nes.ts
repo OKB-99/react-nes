@@ -26,7 +26,7 @@ export class NES {
     const [ headers, programRom, characterRom ] = this.parse(buffer);
 
     this.audioConfig = {
-      masterVolume: parseFloat(sessionStorage.getItem('nes-audio-volume') as string)
+      masterVolume: parseFloat(localStorage.getItem('nes-audio-volume') as string)
     };
 
     const mapper = this.getMap(headers, programRom, characterRom);

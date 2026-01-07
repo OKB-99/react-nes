@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Grid, Input, Button, Slider, IconButton } from '@mui/material';
+import { Grid, Input, Button, Slider, IconButton, Modal } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { VolumeUp, Keyboard } from '@mui/icons-material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,6 +7,8 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faGamepad } from '@fortawesome/fontawesome-free-solid';
 import './App.css';
 import { NES } from './nes';
+import KeyboardModal from './components/KeyboardModal';
+import { KeyboardMap } from './utils/commons';
 
 const theme = createTheme({
   palette: {
@@ -18,17 +20,28 @@ const theme = createTheme({
 
 const App: React.FC = () => {
   const nes = useRef(undefined as NES | undefined);
-  const [ volume, setVolume ] = useState(0.5);
+  const [ volume, setVolume ] = useState(parseFloat(localStorage.getItem('nes-audio-volume') || '0.5'));
 
   useEffect(() => {
     // Load volume from session storage
-    if (!sessionStorage.getItem('nes-audio-volume')) {
-      sessionStorage.setItem('nes-audio-volume', '0.5');
+    if (!localStorage.getItem('nes-audio-volume')) {
+      localStorage.setItem('nes-audio-volume', '0.5');
     }
 
     const volumeSlider = document.getElementById('volumeSlider') as HTMLInputElement;
-    setVolume(parseFloat(sessionStorage.getItem('nes-audio-volume') as string));
+    setVolume(parseFloat(localStorage.getItem('nes-audio-volume') as string));
     volumeSlider.style.visibility = 'visible';
+
+    // Load keyboard map from local storage
+    if (!localStorage.getItem('keyboard-map')) {
+      const keyboardMap: KeyboardMap = {
+        A: 'X',
+        B: 'Z',
+        SELECT: 'A',
+        START: 'S'
+      };
+      localStorage.setItem('keyboard-map', JSON.stringify(keyboardMap));
+    }
   });
 
   const resetOnClick = () => {
@@ -60,10 +73,16 @@ const App: React.FC = () => {
   const volumeOnChange = (event: Event) => {
     const input = event.target as HTMLInputElement;
     const volume = parseFloat(input.value);
-    sessionStorage.setItem('nes-audio-volume', volume.toString());
+    localStorage.setItem('nes-audio-volume', volume.toString());
     setVolume(volume);
 
     nes.current?.volumeOnChange(volume);
+  }
+
+  const [ keyboardModal, setKeyboardModal ] = useState(false);
+  const handleOpenKB = () => setKeyboardModal(true);
+  const handleCloseKB = () => {
+    setKeyboardModal(false);
   }
   
   return (
@@ -88,7 +107,7 @@ const App: React.FC = () => {
               <Slider id="volumeSlider" hidden min={0} max={1} step={0.1} value={volume} onChange={volumeOnChange}></Slider>
             </Grid>
             <Grid size={1} display={"flex"} style={{ marginLeft: '1vw' }}>
-              <IconButton color="primary">
+              <IconButton color="primary" onClick={handleOpenKB}>
                 <Keyboard fontSize="large" />
               </IconButton>
               <IconButton color="primary" disabled>
@@ -103,6 +122,11 @@ const App: React.FC = () => {
             </Grid>
           </Grid>
         </Grid>
+
+        <Modal open={keyboardModal} onClose={handleCloseKB}
+            style={{ width: '50%', height: '50%', margin: 'auto' }}>
+          <KeyboardModal></KeyboardModal>
+        </Modal>
       </ThemeProvider>
     </>
   );

@@ -1,4 +1,4 @@
-import { Byte } from "../utils/commons";
+import { Byte, getKeycodeFromKey, KeyboardMap } from "../utils/commons";
 import { Controller } from "./controller";
 
 export class KeypadCtrl implements Controller {
@@ -7,6 +7,12 @@ export class KeypadCtrl implements Controller {
   private strobe: 0 | 1 = 0;
   private keyIndex: number = 0;
 
+  private keyboardMap: KeyboardMap;
+  private keycodeA: number;
+  private keycodeB: number;
+  private keycodeStart: number;
+  private keycodeSelect: number;
+
   constructor() {
     document.addEventListener('keydown', (event: KeyboardEvent) => {
       this.onKeyDown(this.getKeyIndex(event.keyCode));
@@ -14,6 +20,8 @@ export class KeypadCtrl implements Controller {
     document.addEventListener('keyup', (event: KeyboardEvent) => {
       this.onKeyUp(this.getKeyIndex(event.keyCode));
     });
+
+    this.updateKeycode();
   }
 
   private onKeyDown(keyIndex: number) {
@@ -43,12 +51,21 @@ export class KeypadCtrl implements Controller {
     this.strobe = (data & 0x1) as 0 | 1;
   }
 
-  private getKeyIndex(keyCode: number): number {
-    switch (keyCode) {
-      case 88: return 0; // X  A 
-      case 90: return 1; // Z  B
-      case 65: return 2; // A  SELECT
-      case 83: return 3; // S  START
+  updateKeycode() {
+    const sKeyboardMap = localStorage.getItem('keyboard-map');
+    this.keyboardMap = JSON.parse(sKeyboardMap);
+    this.keycodeA = getKeycodeFromKey(this.keyboardMap.A);
+    this.keycodeB = getKeycodeFromKey(this.keyboardMap.B);
+    this.keycodeSelect = getKeycodeFromKey(this.keyboardMap.SELECT);
+    this.keycodeStart = getKeycodeFromKey(this.keyboardMap.START);
+  }
+
+  private getKeyIndex(keycode: number): number {
+    switch (keycode) {
+      case this.keycodeA: return 0; // X  A
+      case this.keycodeB: return 1; // Z  B
+      case this.keycodeSelect: return 2; // A  SELECT
+      case this.keycodeStart: return 3; // S  START
       case 38: return 4; // ↑  ↑  
       case 40: return 5; // ↓  ↓
       case 37: return 6; // ←  ←
