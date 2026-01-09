@@ -23,7 +23,7 @@ const KeyboardModal = () => {
           <TableHead>
             <TableRow>
               <TableCell align="right">Buttons</TableCell>
-              <TableCell align="right">Assigned keys</TableCell>
+              <TableCell align="right">Assigned keys (A-Z or 0-9)</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
