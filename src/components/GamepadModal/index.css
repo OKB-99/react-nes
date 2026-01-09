@@ -1,0 +1,16 @@
+.circle {
+  margin: 0.5vw;
+  width: 2vw;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid red;/* Optional border */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.circle-pressed {
+  background-color: red;
+}

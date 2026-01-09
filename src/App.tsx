@@ -7,8 +7,9 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faGamepad } from '@fortawesome/fontawesome-free-solid';
 import { NES } from './nes';
 import KeyboardModal from './components/KeyboardModal';
-import { KeyboardMap } from './utils/commons';
+import { GamepadMap, KeyboardMap } from './utils/commons';
 import { NesConfig } from './nes-config';
+import GamepadModal from './components/GamepadModal';
 
 const theme = createTheme({
   palette: {
@@ -40,6 +41,17 @@ const App: React.FC = () => {
         START: 'S'
       };
       localStorage.setItem('keyboard-map', JSON.stringify(keyboardMap));
+    }
+
+    // Load gamepad map from local storage
+    if (!localStorage.getItem('gamepad-map')) {
+      const gamepadMap: GamepadMap = {
+        A: 0,
+        B: 1,
+        SELECT: 2,
+        START: 3
+      };
+      localStorage.setItem('gamepad-map', JSON.stringify(gamepadMap));
     }
   });
 
@@ -83,6 +95,13 @@ const App: React.FC = () => {
     setKeyboardModal(false);
     nesConfig.current.updateKeyboardMap = true; // KeyboardMap to be updated
   }
+
+  const [ gamepadModal, setGamepadModal ] = useState(false);
+  const handleOpenGP = () => setGamepadModal(true);
+  const handleCloseGP = () => {
+    setGamepadModal(false);
+    nesConfig.current.updateGamepadMap = true; // gamepadMap to be updated
+  }
   
   return (
     <>
@@ -110,7 +129,7 @@ const App: React.FC = () => {
               <IconButton color="primary" onClick={handleOpenKB}>
                 <Keyboard fontSize="large" />
               </IconButton>
-              <IconButton color="primary" disabled>
+              <IconButton color="primary" onClick={handleOpenGP}>
                 <FontAwesomeIcon icon={faGamepad as IconProp} />
               </IconButton>
             </Grid>
@@ -124,8 +143,15 @@ const App: React.FC = () => {
         </Grid>
 
         <Modal open={keyboardModal} onClose={handleCloseKB}
-            style={{ width: '50%', height: '50%', margin: 'auto' }}>
+            style={{ width: '50%', height: '50%', margin: 'auto' }}
+            sx={{ '& .MuiGrid-container': { background: 'white' } }}>
           <KeyboardModal></KeyboardModal>
+        </Modal>
+
+        <Modal open={gamepadModal} onClose={handleCloseGP}
+            style={{ width: '50%', height: '50%', margin: 'auto' }}
+            sx={{ '& .MuiGrid-container': { background: 'white' } }}>
+          <GamepadModal></GamepadModal>
         </Modal>
       </ThemeProvider>
     </>

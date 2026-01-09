@@ -93,3 +93,10 @@ export function getKeycodeFromKey(str: KeyboardKey): number {
     default: return 0;
   }
 }
+
+export interface GamepadMap {
+  A: number;
+  B: number;
+  SELECT: number;
+  START: number;
+}
