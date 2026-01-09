@@ -29,7 +29,6 @@ export class CpuBus {
     private ppu: PPU;
     private apu: APU;
     private nesConfig: NesConfig;
-    private controller1: Controller;
     private mapper: Mapper;
 
     constructor(mapper: Mapper, wram: RAM, ppu: PPU, apu: APU, nesConfig: NesConfig) {
@@ -38,19 +37,6 @@ export class CpuBus {
         this.ppu = ppu;
         this.apu = apu;
         this.nesConfig = nesConfig;
-        this.controller1 = new KeypadCtrl(nesConfig);
-
-        window.addEventListener("gamepadconnected", (e) => {
-            console.log("Controller connected");
-            if (e.gamepad) {
-              this.controller1 = new GamepadCtrl(this.nesConfig);
-            }
-        });
-
-        window.addEventListener("gamepaddisconnected", (e) => {
-          console.log("Controller disconnected");
-          this.controller1 = new KeypadCtrl(this.nesConfig);
-        });
     }
 
     readByCpu(addr: Word): Byte {
@@ -70,7 +56,7 @@ export class CpuBus {
             data = this.ppu.readReg(realAddr);
         } else if (addr <= 0x4020) {
             if (addr === 0x4016) {
-                data = this.controller1.read();
+                data = this.nesConfig.controller1.read();
             } else {
                 data = 0;
             }
@@ -107,7 +93,7 @@ export class CpuBus {
                 // Copy 256 B of data from 0x100*N(=data) of WRAM to OAM (513 cycles = 1 idle +256*2 cycles)
                 this.ppu.dma(data); //TODO delay 513 cycles;
             } else if (addr === 0x4016) {
-                this.controller1.write(data);
+                this.nesConfig.controller1.write(data);
             } else {
                 this.apu.writeReg(addr - 0x4000, data);
             }

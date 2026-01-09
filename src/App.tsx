@@ -10,6 +10,8 @@ import KeyboardModal from './components/KeyboardModal';
 import { GamepadMap, KeyboardMap } from './utils/commons';
 import { NesConfig } from './nes-config';
 import GamepadModal from './components/GamepadModal';
+import { GamepadCtrl } from './controller/gamepad-ctrl';
+import { KeypadCtrl } from './controller/keypad-ctrl';
 
 const theme = createTheme({
   palette: {
@@ -23,6 +25,7 @@ const App: React.FC = () => {
   const nes = useRef(undefined as NES | undefined);
   const nesConfig = useRef(new NesConfig());
   const [ volume, setVolume ] = useState(parseFloat(localStorage.getItem('nes-audio-volume') || '0.5'));
+  const [ gamepadDetected, setGamepadDetacted ] = useState(false);
 
   useEffect(() => {
     // Load volume from session storage
@@ -53,6 +56,20 @@ const App: React.FC = () => {
       };
       localStorage.setItem('gamepad-map', JSON.stringify(gamepadMap));
     }
+
+    window.addEventListener("gamepadconnected", (e) => {
+        console.log("Controller connected");
+        if (e.gamepad) {
+          nesConfig.current.controller1 = new GamepadCtrl(nesConfig.current);
+          setGamepadDetacted(true);
+        }
+    });
+
+    window.addEventListener("gamepaddisconnected", (e) => {
+      console.log("Controller disconnected");
+      nesConfig.current.controller1 = new KeypadCtrl(nesConfig.current);
+      setGamepadDetacted(false);
+    });
   });
 
   const resetOnClick = () => {
@@ -126,10 +143,10 @@ const App: React.FC = () => {
               <Slider id="volumeSlider" min={0} max={1} step={0.1} value={volume} onChange={volumeOnChange}></Slider>
             </Grid>
             <Grid size={1} display={"flex"} style={{ marginLeft: '1vw' }}>
-              <IconButton color="primary" onClick={handleOpenKB}>
+              <IconButton color="primary" disabled={gamepadDetected} onClick={handleOpenKB}>
                 <Keyboard fontSize="large" />
               </IconButton>
-              <IconButton color="primary" onClick={handleOpenGP}>
+              <IconButton color="primary" disabled={!gamepadDetected} onClick={handleOpenGP}>
                 <FontAwesomeIcon icon={faGamepad as IconProp} />
               </IconButton>
             </Grid>
