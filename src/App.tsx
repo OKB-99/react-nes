@@ -5,13 +5,13 @@ import { VolumeUp, Keyboard } from '@mui/icons-material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faGamepad } from '@fortawesome/fontawesome-free-solid';
-import { NES } from './nes';
+import { NES } from './nes/nes';
 import KeyboardModal from './components/KeyboardModal';
-import { GamepadMap, KeyboardMap } from './utils/commons';
-import { NesConfig } from './nes-config';
+import { GamepadMap, KeyboardMap } from './nes/utils/commons';
+import { NesConfig } from './nes/nes-config';
 import GamepadModal from './components/GamepadModal';
-import { GamepadCtrl } from './controller/gamepad-ctrl';
-import { KeypadCtrl } from './controller/keypad-ctrl';
+import { GamepadCtrl } from './nes/controller/gamepad-ctrl';
+import { KeypadCtrl } from './nes/controller/keypad-ctrl';
 
 const theme = createTheme({
   palette: {

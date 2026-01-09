@@ -1,5 +1,5 @@
 import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, TextField, Input } from '@mui/material';
-import { KeyboardKey, KeyboardMap } from '../../utils/commons';
+import { KeyboardKey, KeyboardMap } from '../../nes/utils/commons';
 import React from 'react';
 
 

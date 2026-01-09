@@ -1,5 +1,5 @@
 import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, TextField, Input, Box, Grid } from '@mui/material';
-import { GamepadMap } from '../../utils/commons';
+import { GamepadMap } from '../../nes/utils/commons';
 import React, { useEffect, useRef, useState } from 'react';
 import './index.css';
 
