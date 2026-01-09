@@ -1,5 +1,5 @@
+import { NesConfig } from '../nes-config';
 import { Byte } from '../utils/commons';
-import { AudioConfig } from './audio-config';
 import { lengthCounterTbl, noisePeriodTbl } from './lookup-table';
 
 export class NoiseChannel {
@@ -8,7 +8,7 @@ export class NoiseChannel {
   private whiteNoise : AudioBufferSourceNode;
   private gainNode: GainNode;
   private bandpass: BiquadFilterNode;
-  private audioConfig: AudioConfig;
+  private nesConfig: NesConfig;
 
   /** Register 0 */
   private envelopePeriod = 0;
@@ -27,9 +27,9 @@ export class NoiseChannel {
 
   private isPlaying = false;
 
-  constructor(audioCtx: AudioContext, audioConfig: AudioConfig) {
+  constructor(audioCtx: AudioContext, nesConfig: NesConfig) {
     this.audioCtx = audioCtx;
-    this.audioConfig = audioConfig;
+    this.nesConfig = nesConfig;
     this.gainNode = this.audioCtx.createGain();
 
     const bufferSize = 2 * this.audioCtx.sampleRate;
@@ -138,6 +138,6 @@ export class NoiseChannel {
 
   private setVolume(volume: number) {
     volume = Math.max(0, Math.min(1, volume / 16));
-    this.gainNode.gain.value = volume * this.audioConfig.masterVolume;
+    this.gainNode.gain.value = volume * this.nesConfig.masterVolume;
   }
 }

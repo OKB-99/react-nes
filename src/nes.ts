@@ -1,4 +1,3 @@
-import { AudioConfig } from "./audio/audio-config";
 import { CpuBus } from "./bus/cpu-bus";
 import { Interrupts } from "./bus/interrupts";
 import { PpuBus } from "./bus/ppu-bus";
@@ -15,26 +14,22 @@ import { PPU } from "./proc/ppu";
 import { ROM, RAM, MapperType } from "./utils/commons";
 import { FRAME_RATE } from "./utils/constants";
 import { Memory } from "./utils/commons";
+import { NesConfig } from "./nes-config";
 
 export class NES {
 
   private cpu = null as CPU | null;
   private canvasRenderer = new CanvasRenderer();
-  private audioConfig: AudioConfig;
 
-  constructor(buffer: ArrayBuffer) {
+  constructor(buffer: ArrayBuffer, nesConfig: NesConfig) {
     const [ headers, programRom, characterRom ] = this.parse(buffer);
-
-    this.audioConfig = {
-      masterVolume: parseFloat(localStorage.getItem('nes-audio-volume') as string)
-    };
 
     const mapper = this.getMap(headers, programRom, characterRom);
     const wram = new Memory(new Uint8Array(0x800)); // 2KB
     const ppuBus = new PpuBus(headers, mapper);
     const interrupts = new Interrupts();
     const ppu = new PPU(ppuBus, wram, interrupts);
-    const apu = new APU(this.audioConfig, interrupts);
+    const apu = new APU(nesConfig, interrupts);
 
     const cpuBus = new CpuBus(mapper, wram, ppu, apu);
     this.cpu = new CPU(cpuBus, interrupts);
@@ -87,10 +82,6 @@ export class NES {
     } while (frameObj === null);
   
     this.canvasRenderer.render(frameObj);
-  }
-
-  volumeOnChange(volume: number): void {
-    this.audioConfig.masterVolume = volume;
   }
 
   cpuReset() {

@@ -9,6 +9,8 @@ import './App.css';
 import { NES } from './nes';
 import KeyboardModal from './components/KeyboardModal';
 import { KeyboardMap } from './utils/commons';
+import { NesConfig } from './nes-config';
+import { APU } from './proc/apu';
 
 const theme = createTheme({
   palette: {
@@ -20,6 +22,7 @@ const theme = createTheme({
 
 const App: React.FC = () => {
   const nes = useRef(undefined as NES | undefined);
+  const nesConfig = useRef(new NesConfig());
   const [ volume, setVolume ] = useState(parseFloat(localStorage.getItem('nes-audio-volume') || '0.5'));
 
   useEffect(() => {
@@ -28,9 +31,7 @@ const App: React.FC = () => {
       localStorage.setItem('nes-audio-volume', '0.5');
     }
 
-    const volumeSlider = document.getElementById('volumeSlider') as HTMLInputElement;
-    setVolume(parseFloat(localStorage.getItem('nes-audio-volume') as string));
-    volumeSlider.style.visibility = 'visible';
+    nesConfig.current.masterVolume = parseFloat(localStorage.getItem('nes-audio-volume') as string);
 
     // Load keyboard map from local storage
     if (!localStorage.getItem('keyboard-map')) {
@@ -66,7 +67,7 @@ const App: React.FC = () => {
           console.error("Invalid NES file format.");
           return;
         }
-        nes.current = new NES(buffer);
+        nes.current = new NES(buffer, nesConfig.current);
       });
   }
   
@@ -75,8 +76,7 @@ const App: React.FC = () => {
     const volume = parseFloat(input.value);
     localStorage.setItem('nes-audio-volume', volume.toString());
     setVolume(volume);
-
-    nes.current?.volumeOnChange(volume);
+    nesConfig.current.masterVolume = volume;
   }
 
   const [ keyboardModal, setKeyboardModal ] = useState(false);

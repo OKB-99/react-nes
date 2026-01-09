@@ -1,9 +1,9 @@
-import { AudioConfig } from "../audio/audio-config";
 import { lengthCounterTbl } from "../audio/lookup-table";
 import { NoiseChannel } from "../audio/noise-channel";
 import { PulseChannel } from "../audio/pulse-channel";
 import { TriangleChannel } from "../audio/triangle-channel";
 import { Interrupts } from "../bus/interrupts";
+import { NesConfig } from "../nes-config";
 import { Byte, Word } from "../utils/commons";
 import { CLOCKS_PER_FRAME, CPU_CLOCKS } from "../utils/constants";
 
@@ -20,12 +20,12 @@ export class APU {
   private noiseChannel!: NoiseChannel;
   private interrupts: Interrupts;
 
-  constructor(audioConfig: AudioConfig, interrupts: Interrupts) {
+  constructor(nesConfig: NesConfig, interrupts: Interrupts) {
     this.audioCtx = new AudioContext();
-    this.pulseChannel1 = new PulseChannel(this.audioCtx, audioConfig, 1);
-    this.pulseChannel2 = new PulseChannel(this.audioCtx, audioConfig, 2);
-    this.triangleChannel = new TriangleChannel(this.audioCtx, audioConfig);
-    this.noiseChannel = new NoiseChannel(this.audioCtx, audioConfig);
+    this.pulseChannel1 = new PulseChannel(this.audioCtx, nesConfig, 1);
+    this.pulseChannel2 = new PulseChannel(this.audioCtx, nesConfig, 2);
+    this.triangleChannel = new TriangleChannel(this.audioCtx, nesConfig);
+    this.noiseChannel = new NoiseChannel(this.audioCtx, nesConfig);
     this.interrupts = interrupts;
   }
 

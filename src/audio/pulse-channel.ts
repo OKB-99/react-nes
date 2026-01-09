@@ -1,6 +1,6 @@
+import { NesConfig } from '../nes-config';
 import { Byte } from '../utils/commons';
 import { CPU_CLOCKS, FRAME_RATE } from '../utils/constants';
-import { AudioConfig } from './audio-config';
 import { pulse } from './pulse';
 
 export class PulseChannel {
@@ -9,7 +9,7 @@ export class PulseChannel {
   private audioCtx: AudioContext;
   private gainNode: GainNode;
   private oscillator: OscillatorNode;
-  private audioConfig: AudioConfig;
+  private nesConfig: NesConfig;
 
   /** Register 0 */
   private dutySequence: number[] = [];
@@ -44,10 +44,10 @@ export class PulseChannel {
   private readonly dutyCycles = ['0.125', '0.25', '0.5', '0.75'];
   private waves: {[key: string]: PeriodicWave} = {};
 
-  constructor(audioCtx: AudioContext, audioConfig: AudioConfig, pulseNum: 1 | 2) {
+  constructor(audioCtx: AudioContext, nesConfig: NesConfig, pulseNum: 1 | 2) {
     this.pulseNum = pulseNum;
     this.audioCtx = audioCtx;
-    this.audioConfig = audioConfig;
+    this.nesConfig = nesConfig;
     this.gainNode = this.audioCtx.createGain();
     this.gainNode.connect(this.audioCtx.destination);
     this.oscillator = this.audioCtx.createOscillator();
@@ -183,7 +183,7 @@ export class PulseChannel {
 
   private setVolume(volume: number) {
     volume = Math.max(0, Math.min(1, volume / 16));
-    this.gainNode.gain.value = volume * this.audioConfig.masterVolume;
+    this.gainNode.gain.value = volume * this.nesConfig.masterVolume;
   }
 
 }

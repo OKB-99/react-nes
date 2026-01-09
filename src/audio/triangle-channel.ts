@@ -1,13 +1,13 @@
+import { NesConfig } from "../nes-config";
 import { Byte } from "../utils/commons";
 import { CPU_CLOCKS, FRAME_RATE } from "../utils/constants";
-import { AudioConfig } from "./audio-config";
 
 export class TriangleChannel {
 
   private audioCtx: AudioContext;
   private gainNode: GainNode;
   private oscillator: OscillatorNode;
-  private audioConfig: AudioConfig;
+  private nesConfig: NesConfig;
 
   /** Register 0 */
   private linearCounter = 0;
@@ -18,9 +18,9 @@ export class TriangleChannel {
 
   private isPlaying = false;
 
-  constructor(audioCtx: AudioContext, audioConfig: AudioConfig) {
+  constructor(audioCtx: AudioContext, nesConfig: NesConfig) {
     this.audioCtx = audioCtx;
-    this.audioConfig = audioConfig;
+    this.nesConfig = nesConfig;
     this.gainNode = this.audioCtx.createGain();
     this.gainNode.connect(this.audioCtx.destination);
     this.oscillator = this.audioCtx.createOscillator();
@@ -86,6 +86,6 @@ export class TriangleChannel {
 
   private setVolume(volume: number) {
     volume = Math.max(0, Math.min(1, volume));
-    this.gainNode.gain.value = volume * this.audioConfig.masterVolume;
+    this.gainNode.gain.value = volume * this.nesConfig.masterVolume;
   }
 }
