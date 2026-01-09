@@ -31,7 +31,7 @@ export class NES {
     const ppu = new PPU(ppuBus, wram, interrupts);
     const apu = new APU(nesConfig, interrupts);
 
-    const cpuBus = new CpuBus(mapper, wram, ppu, apu);
+    const cpuBus = new CpuBus(mapper, wram, ppu, apu, nesConfig);
     this.cpu = new CPU(cpuBus, interrupts);
 
     let then = performance.now();

@@ -7,6 +7,7 @@ import { Mapper } from '../mapper/mapper';
 import { UxROM } from '../mapper/uxrom';
 import { Controller } from '../controller/controller';
 import { GamepadCtrl } from '../controller/gamepad-ctrl';
+import { NesConfig } from '../nes-config';
 
 /*
  * Address         Size        Device
@@ -27,25 +28,28 @@ export class CpuBus {
     private extProgramRam: RAM = new Memory(new Uint8Array(0x2000)); // 8KB
     private ppu: PPU;
     private apu: APU;
-    private controller1: Controller = new KeypadCtrl();
+    private nesConfig: NesConfig;
+    private controller1: Controller;
     private mapper: Mapper;
 
-    constructor(mapper: Mapper, wram: RAM, ppu: PPU, apu: APU) {
+    constructor(mapper: Mapper, wram: RAM, ppu: PPU, apu: APU, nesConfig: NesConfig) {
         this.mapper = mapper;
         this.wram = wram;
         this.ppu = ppu;
         this.apu = apu;
+        this.nesConfig = nesConfig;
+        this.controller1 = new KeypadCtrl(nesConfig);
 
         window.addEventListener("gamepadconnected", (e) => {
             console.log("Controller connected");
             if (e.gamepad) {
-              this.controller1 = new GamepadCtrl();
+              this.controller1 = new GamepadCtrl(this.nesConfig);
             }
         });
 
         window.addEventListener("gamepaddisconnected", (e) => {
           console.log("Controller disconnected");
-          this.controller1 = new KeypadCtrl();
+          this.controller1 = new KeypadCtrl(this.nesConfig);
         });
     }
 

@@ -1,3 +1,4 @@
+import { NesConfig } from "../nes-config";
 import { Byte } from "../utils/commons";
 import { FRAME_RATE } from "../utils/constants";
 import { Controller } from "./controller";
@@ -5,10 +6,12 @@ import { Controller } from "./controller";
 export class GamepadCtrl implements Controller {
 
   private interval: NodeJS.Timeout;
+  private nesConfig: NesConfig;
 
-  constructor() {
+  constructor(nesConfig: NesConfig) {
     //console.log("Gamepad controller initialized");
     this.interval = setInterval(() => this.readButtons(), 1000/FRAME_RATE);
+    this.nesConfig = nesConfig;
   }
 
   private keyStatus: Byte = 0x00;

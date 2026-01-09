@@ -1,8 +1,10 @@
+import { NesConfig } from "../nes-config";
 import { Byte, getKeycodeFromKey, KeyboardMap } from "../utils/commons";
 import { Controller } from "./controller";
 
 export class KeypadCtrl implements Controller {
 
+  private nesConfig: NesConfig;
   private keyStatus: Byte = 0x00;
   private strobe: 0 | 1 = 0;
   private keyIndex: number = 0;
@@ -13,7 +15,7 @@ export class KeypadCtrl implements Controller {
   private keycodeStart: number;
   private keycodeSelect: number;
 
-  constructor() {
+  constructor(nesConfig: NesConfig) {
     document.addEventListener('keydown', (event: KeyboardEvent) => {
       this.onKeyDown(this.getKeyIndex(event.keyCode));
     });
@@ -21,6 +23,7 @@ export class KeypadCtrl implements Controller {
       this.onKeyUp(this.getKeyIndex(event.keyCode));
     });
 
+    this.nesConfig = nesConfig;
     this.updateKeycode();
   }
 
@@ -61,6 +64,11 @@ export class KeypadCtrl implements Controller {
   }
 
   private getKeyIndex(keycode: number): number {
+    if (this.nesConfig.updateKeyboardMap) {
+      this.updateKeycode();
+      this.nesConfig.updateKeyboardMap = false;
+    }
+
     switch (keycode) {
       case this.keycodeA: return 0; // X  A
       case this.keycodeB: return 1; // Z  B

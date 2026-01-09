@@ -5,12 +5,10 @@ import { VolumeUp, Keyboard } from '@mui/icons-material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faGamepad } from '@fortawesome/fontawesome-free-solid';
-import './App.css';
 import { NES } from './nes';
 import KeyboardModal from './components/KeyboardModal';
 import { KeyboardMap } from './utils/commons';
 import { NesConfig } from './nes-config';
-import { APU } from './proc/apu';
 
 const theme = createTheme({
   palette: {
@@ -83,6 +81,7 @@ const App: React.FC = () => {
   const handleOpenKB = () => setKeyboardModal(true);
   const handleCloseKB = () => {
     setKeyboardModal(false);
+    nesConfig.current.updateKeyboardMap = true; // KeyboardMap to be updated
   }
   
   return (
