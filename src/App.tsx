@@ -88,7 +88,8 @@ const App: React.FC = () => {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Grid container direction="column" spacing={3} width="45vw" justifyContent="center" alignItems="center" margin="auto">
+        <Grid container direction="column" spacing={3} width="45vw" justifyContent="center" alignItems="center" margin="auto"
+            style={{ userSelect: 'none' }}>
           <Grid container>
           </Grid>
           <Grid container direction="row" width="100%">
@@ -104,7 +105,7 @@ const App: React.FC = () => {
               <VolumeUp color="primary" />
             </Grid>
             <Grid size={3}>
-              <Slider id="volumeSlider" hidden min={0} max={1} step={0.1} value={volume} onChange={volumeOnChange}></Slider>
+              <Slider id="volumeSlider" min={0} max={1} step={0.1} value={volume} onChange={volumeOnChange}></Slider>
             </Grid>
             <Grid size={1} display={"flex"} style={{ marginLeft: '1vw' }}>
               <IconButton color="primary" onClick={handleOpenKB}>
