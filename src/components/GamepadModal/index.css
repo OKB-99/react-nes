@@ -3,8 +3,9 @@
   width: 2vw;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
-  background-color: white;
-  border: 2px solid red;/* Optional border */
+  background-color: #711521;
+  border: 3px solid black;/* Optional border */
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;

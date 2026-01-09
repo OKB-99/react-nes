@@ -149,7 +149,7 @@ const App: React.FC = () => {
         </Modal>
 
         <Modal open={gamepadModal} onClose={handleCloseGP}
-            style={{ width: '50%', height: '50%', margin: 'auto' }}
+            style={{ width: '50%', height: '60%', margin: 'auto' }}
             sx={{ '& .MuiGrid-container': { background: 'white' } }}>
           <GamepadModal></GamepadModal>
         </Modal>
