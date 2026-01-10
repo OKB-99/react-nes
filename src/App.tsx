@@ -165,13 +165,13 @@ const App: React.FC = () => {
         </Grid>
 
         <Modal open={keyboardModal} onClose={handleCloseKB}
-            style={{ width: '50%', height: '50%', margin: 'auto' }}
+            style={{ width: '50%', height: '70%', margin: 'auto' }}
             sx={{ '& .MuiGrid-container': { background: 'white' } }}>
           <KeyboardModal></KeyboardModal>
         </Modal>
 
         <Modal open={gamepadModal} onClose={handleCloseGP}
-            style={{ width: '50%', height: '60%', margin: 'auto' }}
+            style={{ width: '50%', height: '80%', margin: 'auto' }}
             sx={{ '& .MuiGrid-container': { background: 'white' } }}>
           <GamepadModal></GamepadModal>
         </Modal>

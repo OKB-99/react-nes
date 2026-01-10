@@ -35,13 +35,19 @@ const GamepadModal = () => {
     <>
       <Grid container spacing={1} direction="column">
         <Grid container direction="row">
+        <Box component="p">
+          <Box component="span" sx={{ fontSize: '1.17em', fontWeight: 'bold', padding: '0 10px'}}>Gamepad Configuration</Box>
+          <Box component="span">*A page reload may be necessary after configuration.</Box>
+        </Box>
+        </Grid>
+        <Grid container direction="row">
           <Box>
             <Box>
-              <Box component="span">Gamepad Buttons Test</Box>
+              <Box component="span" sx={{ padding: '0 10px' }}>Gamepad Buttons Test</Box>
             </Box>
             <Box display="flex">
               {buttonsStats.map((pressed, id) =>
-                  <Box className={'circle' + (pressed ? ' circle-pressed' : '')}>{id}</Box>
+                  <Box key={id} className={'circle' + (pressed ? ' circle-pressed' : '')}>{id}</Box>
               )}
             </Box>
           </Box>
