@@ -127,4 +127,8 @@ export class APU {
     //this.pulseChannel2.countTimer();
     this.noiseChannel.countTimer();
   }
+
+  closeAudioCtx() {
+    this.audioCtx.close();
+  }
 }

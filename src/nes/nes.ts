@@ -18,6 +18,7 @@ import { NesConfig } from "./nes-config";
 
 export class NES {
 
+  private terminated = false;
   private cpu = null as CPU | null;
   private canvasRenderer = new CanvasRenderer();
 
@@ -41,6 +42,11 @@ export class NES {
     let loopcount = 0
     const loop = (now: number) => {
 
+      if (this.terminated) {
+        apu.closeAudioCtx();
+        return;
+      }
+
       requestAnimationFrame(loop);
 
       const elapsed = now - then;
@@ -55,6 +61,10 @@ export class NES {
     }
 
     requestAnimationFrame(loop);
+  }
+
+  terminate() {
+    this.terminated = true;
   }
 
   frame(ppu: PPU, apu: APU) {

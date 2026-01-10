@@ -94,6 +94,11 @@ const App: React.FC = () => {
           console.error("Invalid NES file format.");
           return;
         }
+
+        if (nes.current) {
+          nes.current.terminate();
+        }
+
         nes.current = new NES(buffer, nesConfig.current);
       });
   }
