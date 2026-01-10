@@ -134,7 +134,7 @@ const App: React.FC = () => {
           </Grid>
           <Grid container direction="row" width="100%">
             <Grid size={4}>
-              <Input type='file' onChange={fileOnChange}></Input>
+              <Input type='file' inputProps={{ accept: '.nes'}} onChange={fileOnChange} />
             </Grid>
             <Grid size={1}>
             </Grid>
