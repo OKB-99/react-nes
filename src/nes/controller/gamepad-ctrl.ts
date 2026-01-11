@@ -15,6 +15,18 @@ export class GamepadCtrl implements Controller {
   constructor(nesConfig: NesConfig) {
     //console.log("Gamepad controller initialized");
     this.interval = setInterval(() => this.readButtons(), 1000/FRAME_RATE);
+
+    // Load gamepad map from local storage
+    if (!localStorage.getItem('gamepad-map')) {
+      const gamepadMap: GamepadMap = {
+        A: 0,
+        B: 1,
+        SELECT: 2,
+        START: 3
+      };
+      localStorage.setItem('gamepad-map', JSON.stringify(gamepadMap));
+    }
+
     this.nesConfig = nesConfig;
     this.updateButtonMap();
   }
