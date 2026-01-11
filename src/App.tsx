@@ -70,6 +70,18 @@ const App: React.FC = () => {
       nesConfig.current.controller1 = new KeypadCtrl(nesConfig.current);
       setGamepadDetacted(false);
     });
+
+    // Load the initial ROM
+    const initialRomFile = 'Tetramino.nes';
+    fetch(`${process.env.PUBLIC_URL}/roms/${initialRomFile}`).then(
+      response => response.blob().then(blob => {
+        const file = new File([blob], initialRomFile)
+        const event = {
+          target: { files: [file] }
+        } as unknown as React.ChangeEvent<HTMLInputElement>;
+        fileOnChange(event);
+      })
+    );
   });
 
   const resetOnClick = () => {
