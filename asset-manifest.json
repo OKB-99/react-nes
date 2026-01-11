@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/react-nes/static/css/main.ba6cc33f.css",
+    "main.js": "/react-nes/static/js/main.39fb437a.js",
+    "static/js/453.9785249a.chunk.js": "/react-nes/static/js/453.9785249a.chunk.js",
+    "index.html": "/react-nes/index.html",
+    "main.ba6cc33f.css.map": "/react-nes/static/css/main.ba6cc33f.css.map",
+    "main.39fb437a.js.map": "/react-nes/static/js/main.39fb437a.js.map",
+    "453.9785249a.chunk.js.map": "/react-nes/static/js/453.9785249a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ba6cc33f.css",
+    "static/js/main.39fb437a.js"
+  ]
+}
