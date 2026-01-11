@@ -22,6 +22,17 @@ export class KeypadCtrl implements Controller {
       this.onKeyUp(this.getKeyIndex(event.keyCode));
     });
 
+    // Load keyboard map from local storage
+    if (!localStorage.getItem('keyboard-map')) {
+      const keyboardMap: KeyboardMap = {
+        A: 'X',
+        B: 'Z',
+        SELECT: 'A',
+        START: 'S'
+      };
+      localStorage.setItem('keyboard-map', JSON.stringify(keyboardMap));
+    }
+
     this.nesConfig = nesConfig;
     this.updateKeycodeMap();
   }

@@ -7,7 +7,6 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faGamepad } from '@fortawesome/fontawesome-free-solid';
 import { NES } from './nes/nes';
 import KeyboardModal from './components/KeyboardModal';
-import { GamepadMap, KeyboardMap } from './nes/utils/commons';
 import { NesConfig } from './nes/nes-config';
 import GamepadModal from './components/GamepadModal';
 import { GamepadCtrl } from './nes/controller/gamepad-ctrl';
@@ -34,28 +33,6 @@ const App: React.FC = () => {
     }
 
     nesConfig.current.masterVolume = parseFloat(localStorage.getItem('nes-audio-volume') as string);
-
-    // Load keyboard map from local storage
-    if (!localStorage.getItem('keyboard-map')) {
-      const keyboardMap: KeyboardMap = {
-        A: 'X',
-        B: 'Z',
-        SELECT: 'A',
-        START: 'S'
-      };
-      localStorage.setItem('keyboard-map', JSON.stringify(keyboardMap));
-    }
-
-    // Load gamepad map from local storage
-    if (!localStorage.getItem('gamepad-map')) {
-      const gamepadMap: GamepadMap = {
-        A: 0,
-        B: 1,
-        SELECT: 2,
-        START: 3
-      };
-      localStorage.setItem('gamepad-map', JSON.stringify(gamepadMap));
-    }
 
     window.addEventListener("gamepadconnected", (e) => {
         console.log("Controller connected");
