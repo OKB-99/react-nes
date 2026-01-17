@@ -59,7 +59,7 @@ const App: React.FC = () => {
         fileOnChange(event);
       })
     );
-  });
+  }, []);
 
   const resetOnClick = () => {
     nes.current?.cpuReset();
@@ -68,14 +68,14 @@ const App: React.FC = () => {
   const fileOnChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
 
     const input = evt.target;
-  
+
     if (!input.files || input.files.length === 0) {
       console.error("No file selected.");
       return;
     }
 
     const file: File = input.files[0];
-  
+
     file.arrayBuffer()
       .then((buffer: ArrayBuffer) => {
         const bytes = new Uint8Array(buffer);
@@ -91,7 +91,7 @@ const App: React.FC = () => {
         nes.current = new NES(buffer, nesConfig.current);
       });
   }
-  
+
   const volumeOnChange = (event: Event) => {
     const input = event.target as HTMLInputElement;
     const volume = parseFloat(input.value);
@@ -113,11 +113,11 @@ const App: React.FC = () => {
     setGamepadModal(false);
     nesConfig.current.updateGamepadMap = true; // gamepadMap to be updated
   }
-  
+
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Grid container direction="column" spacing={3} width="45vw" justifyContent="center" alignItems="center" margin="auto"
+        <Grid container direction="column" spacing={2} width="45vw" justifyContent="center" alignItems="center" margin="auto"
             style={{ userSelect: 'none' }}>
           <Grid container>
           </Grid>
@@ -148,7 +148,7 @@ const App: React.FC = () => {
           <Grid container>
             <Grid>
               <canvas id="canvas" width="256" height="240"
-                  style={{ width: '40vw', border: '0px solid #711521', aspectRatio: 16 / 15 }}></canvas>
+                  style={{ height: '75vh', border: '0px solid #711521', aspectRatio: 16 / 15 }}></canvas>
             </Grid>
           </Grid>
         </Grid>
