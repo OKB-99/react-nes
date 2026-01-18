@@ -1,8 +1,9 @@
 import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, TextField, Input, Box, Grid } from '@mui/material';
-import { GamepadMap } from '../../nes/utils/commons';
+import { GamepadMap } from '../nes/utils/commons';
 import React, { useEffect, useRef, useState } from 'react';
-import './index.css';
+import '../App.css';
 import { ArrowBack, ArrowUpward, ArrowForward, ArrowDownward } from '@mui/icons-material';
+import CommandTextField from './CommandTextField';
 
 
 /**
@@ -66,40 +67,32 @@ const GamepadModal = () => {
                   <TableRow>
                     <TableCell align="right" size="small">A</TableCell>
                     <TableCell align="right" size="small">
-                      <TextField
-                          required size="small" type="number"
-                          defaultValue={gamepadMap.A}
-                          onChange={updateGamepadMap('A' as keyof GamepadMap)}
+                      <CommandTextField
+                          ctrlKey={'A'} controller={'gamepad'} defaultValue={gamepadMap.A} controllerMap={gamepadMap}
                       />
                     </TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell align="right" size="small">B</TableCell>
                     <TableCell align="right" size="small">
-                      <TextField
-                          required size="small" type="number"
-                          defaultValue={gamepadMap.B}
-                          onChange={updateGamepadMap('B' as keyof GamepadMap)}
+                      <CommandTextField
+                          ctrlKey={'B'} controller={'gamepad'} defaultValue={gamepadMap.B} controllerMap={gamepadMap}
                       />
                     </TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell align="right" size="small">SELECT</TableCell>
                     <TableCell align="right" size="small">
-                      <TextField
-                          required size="small" type="number"
-                          defaultValue={gamepadMap.SELECT}
-                          onChange={updateGamepadMap('SELECT' as keyof GamepadMap)}
+                      <CommandTextField
+                          ctrlKey={'SELECT'} controller={'gamepad'} defaultValue={gamepadMap.SELECT} controllerMap={gamepadMap}
                       />
                     </TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell align="right" size="small">START</TableCell>
                     <TableCell align="right" size="small">
-                      <TextField
-                          required size="small" type="number"
-                          defaultValue={gamepadMap.START}
-                          onChange={updateGamepadMap('START' as keyof GamepadMap)}
+                      <CommandTextField
+                          ctrlKey={'START'} controller={'gamepad'} defaultValue={gamepadMap.START} controllerMap={gamepadMap}
                       />
                     </TableCell>
                   </TableRow>
