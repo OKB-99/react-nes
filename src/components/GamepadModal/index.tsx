@@ -2,6 +2,7 @@ import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody
 import { GamepadMap } from '../../nes/utils/commons';
 import React, { useEffect, useRef, useState } from 'react';
 import './index.css';
+import { ArrowBack, ArrowUpward, ArrowForward, ArrowDownward } from '@mui/icons-material';
 
 
 /**
@@ -11,7 +12,7 @@ import './index.css';
 const GamepadModal = () => {
 
   let gamepadMap: GamepadMap = JSON.parse(localStorage.getItem('gamepad-map'));
-  
+
   const updateGamepadMap = (buttonId: keyof GamepadMap ) => (env: React.FocusEvent<HTMLInputElement>) => {
     gamepadMap[buttonId] = parseInt(env.target.value);
     localStorage.setItem('gamepad-map', JSON.stringify(gamepadMap));
@@ -57,14 +58,14 @@ const GamepadModal = () => {
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell align="right">Buttons</TableCell>
-                  <TableCell align="right">Assigned buttons (Numeric)</TableCell>
+                  <TableCell align="right" size="small">Buttons</TableCell>
+                  <TableCell align="right" size="small">Assigned buttons (Numeric)</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                   <TableRow>
-                    <TableCell align="right">A</TableCell>
-                    <TableCell align="right">
+                    <TableCell align="right" size="small">A</TableCell>
+                    <TableCell align="right" size="small">
                       <TextField
                           required size="small" type="number"
                           defaultValue={gamepadMap.A}
@@ -73,8 +74,8 @@ const GamepadModal = () => {
                     </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell align="right">B</TableCell>
-                    <TableCell align="right">
+                    <TableCell align="right" size="small">B</TableCell>
+                    <TableCell align="right" size="small">
                       <TextField
                           required size="small" type="number"
                           defaultValue={gamepadMap.B}
@@ -83,8 +84,8 @@ const GamepadModal = () => {
                     </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell align="right">SELECT</TableCell>
-                    <TableCell align="right">
+                    <TableCell align="right" size="small">SELECT</TableCell>
+                    <TableCell align="right" size="small">
                       <TextField
                           required size="small" type="number"
                           defaultValue={gamepadMap.SELECT}
@@ -93,8 +94,8 @@ const GamepadModal = () => {
                     </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell align="right">START</TableCell>
-                    <TableCell align="right">
+                    <TableCell align="right" size="small">START</TableCell>
+                    <TableCell align="right" size="small">
                       <TextField
                           required size="small" type="number"
                           defaultValue={gamepadMap.START}
@@ -103,20 +104,20 @@ const GamepadModal = () => {
                     </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell align="right">←</TableCell>
-                    <TableCell align="right">←</TableCell>
+                    <TableCell align="right" size="small"><ArrowBack fontSize='small'/></TableCell>
+                    <TableCell align="right" size="small"><ArrowBack fontSize='small'/></TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell align="right">↑</TableCell>
-                    <TableCell align="right">↑</TableCell>
+                    <TableCell align="right" size="small"><ArrowUpward fontSize='small'/></TableCell>
+                    <TableCell align="right" size="small"><ArrowUpward fontSize='small'/></TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell align="right">→</TableCell>
-                    <TableCell align="right">→</TableCell>
+                    <TableCell align="right" size="small"><ArrowForward fontSize='small'/></TableCell>
+                    <TableCell align="right" size="small"><ArrowForward fontSize='small'/></TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell align="right">↓</TableCell>
-                    <TableCell align="right">↓</TableCell>
+                    <TableCell align="right" size="small"><ArrowDownward fontSize='small'/></TableCell>
+                    <TableCell align="right" size="small"><ArrowDownward fontSize='small'/></TableCell>
                   </TableRow>
               </TableBody>
             </Table>
