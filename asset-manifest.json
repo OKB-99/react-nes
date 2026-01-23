@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/react-nes/static/css/main.ba6cc33f.css",
-    "main.js": "/react-nes/static/js/main.60b7e153.js",
+    "main.css": "/react-nes/static/css/main.09155e62.css",
+    "main.js": "/react-nes/static/js/main.a30eb2e0.js",
     "static/js/453.9785249a.chunk.js": "/react-nes/static/js/453.9785249a.chunk.js",
     "index.html": "/react-nes/index.html",
-    "main.ba6cc33f.css.map": "/react-nes/static/css/main.ba6cc33f.css.map",
-    "main.60b7e153.js.map": "/react-nes/static/js/main.60b7e153.js.map",
+    "main.09155e62.css.map": "/react-nes/static/css/main.09155e62.css.map",
+    "main.a30eb2e0.js.map": "/react-nes/static/js/main.a30eb2e0.js.map",
     "453.9785249a.chunk.js.map": "/react-nes/static/js/453.9785249a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ba6cc33f.css",
-    "static/js/main.60b7e153.js"
+    "static/css/main.09155e62.css",
+    "static/js/main.a30eb2e0.js"
   ]
 }
