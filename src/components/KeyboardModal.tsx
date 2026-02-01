@@ -1,7 +1,8 @@
 import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, TextField, Input, Grid, Box, Container } from '@mui/material';
-import { KeyboardKey, KeyboardMap } from '../../nes/utils/commons';
+import { KeyboardKey, KeyboardMap } from '../nes/utils/commons';
 import React from 'react';
 import { ArrowBack, ArrowUpward, ArrowForward, ArrowDownward } from '@mui/icons-material';
+import CommandTextField from './CommandTextField';
 
 
 const KeyboardModal = () => {
@@ -40,48 +41,32 @@ const KeyboardModal = () => {
                   <TableRow>
                     <TableCell align="right" size="small">A</TableCell>
                     <TableCell align="right" size="small">
-                      <TextField
-                          required size="small"
-                          defaultValue={keyboardMap.A}
-                          onInput ={onInput('A' as keyof KeyboardMap)}
-                          onChange={updateKeyboardMap('A' as keyof KeyboardMap)}
-                          slotProps={{ htmlInput: { maxLength: 1, minLength: 1 } }}
+                      <CommandTextField
+                          ctrlKey={'A'} controller={'keyboard'} defaultValue={keyboardMap.A} controllerMap={keyboardMap}
                       />
                     </TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell align="right" size="small">B</TableCell>
                     <TableCell align="right" size="small">
-                      <TextField
-                          required size="small"
-                          defaultValue={keyboardMap.B}
-                          onInput ={onInput('B' as keyof KeyboardMap)}
-                          onChange={updateKeyboardMap('B' as keyof KeyboardMap)}
-                          slotProps={{ htmlInput: { maxLength: 1, minLength: 1 } }}
+                      <CommandTextField
+                          ctrlKey={'B'} controller={'keyboard'} defaultValue={keyboardMap.B} controllerMap={keyboardMap}
                       />
                     </TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell align="right" size="small">SELECT</TableCell>
                     <TableCell align="right" size="small">
-                      <TextField
-                          required size="small"
-                          defaultValue={keyboardMap.SELECT}
-                          onInput ={onInput('SELECT' as keyof KeyboardMap)}
-                          onChange={updateKeyboardMap('SELECT' as keyof KeyboardMap)}
-                          slotProps={{ htmlInput: { maxLength: 1, minLength: 1 } }}
+                      <CommandTextField
+                          ctrlKey={'SELECT'} controller={'keyboard'} defaultValue={keyboardMap.SELECT} controllerMap={keyboardMap}
                       />
                     </TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell align="right" size="small">START</TableCell>
                     <TableCell align="right" size="small">
-                      <TextField
-                          required size="small"
-                          defaultValue={keyboardMap.START}
-                          onInput ={onInput('START' as keyof KeyboardMap)}
-                          onChange={updateKeyboardMap('START' as keyof KeyboardMap)}
-                          slotProps={{ htmlInput: { maxLength: 1, minLength: 1 } }}
+                      <CommandTextField
+                          ctrlKey={'START'} controller={'keyboard'} defaultValue={keyboardMap.START} controllerMap={keyboardMap}
                       />
                     </TableCell>
                   </TableRow>
