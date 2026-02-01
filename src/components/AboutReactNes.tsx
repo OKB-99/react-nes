@@ -12,7 +12,7 @@ const AboutReactNes: React.FC = () => {
       <Stack direction="column" spacing={2}>
         <Box component="h3">React NES - Lightweight Famicom Emulator</Box>
 
-        <Box component="p">A lightweight Nintendo Entertainment System (NES) emulator built with TypeScript and React, designed for accuracy, performance, and simplicity. This project emulates the original NES hardware, allowing classic iNES-format .nes ROMs to run directly in a web browser.</Box>
+        <Box component="p">A lightweight Nintendo Entertainment System (NES) emulator built with TypeScript and React, designed for accuracy, performance, and simplicity. This project emulates the original NES hardware, allowing classic iNES-format (.nes) ROMs to run directly in a web browser.</Box>
 
         <Stack direction="row" spacing={3} justifyContent="center" alignItems="center">
           <Box component="img" src={`${process.env.PUBLIC_URL}/images/Super_Mario_Bros.jpg`} sx={imgSize} />
