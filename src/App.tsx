@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Grid, Input, Button, Slider, IconButton, Modal, Box, Link } from '@mui/material';
+import { Grid, Input, Button, Slider, IconButton, Modal, Box, Link, Container, Drawer, Collapse } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { VolumeUp, Keyboard } from '@mui/icons-material';
+import { VolumeUp, Keyboard, KeyboardDoubleArrowLeft, KeyboardDoubleArrowRight } from '@mui/icons-material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faGamepad } from '@fortawesome/fontawesome-free-solid';
@@ -11,6 +11,8 @@ import { NesConfig } from './nes/nes-config';
 import GamepadModal from './components/GamepadModal';
 import { GamepadCtrl } from './nes/controller/gamepad-ctrl';
 import { KeypadCtrl } from './nes/controller/keypad-ctrl';
+import AboutReactNes from './components/AboutReactNes';
+import Main from './components/Main';
 
 const theme = createTheme({
   palette: {
@@ -26,6 +28,7 @@ const App: React.FC = () => {
   const [ volume, setVolume ] = useState(parseFloat(localStorage.getItem('nes-audio-volume') || '0.5'));
   const [ gamepadDetected, setGamepadDetacted ] = useState(false);
   const [ gameStarted, setGameStarted ] = useState(false);
+  const [ aboutReactNesOpened, setAboutReactNesOpened ] = useState(true);
 
   useEffect(() => {
     // Load volume from session storage
@@ -118,58 +121,77 @@ const App: React.FC = () => {
     nesConfig.current.updateGamepadMap = true; // gamepadMap to be updated
   }
 
+  const handleToggleDrawer = () => {
+    setAboutReactNesOpened(!aboutReactNesOpened);
+  }
+
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Grid container direction="column" spacing={2} width="45vw" justifyContent="center" alignItems="center" margin="auto"
-            style={{ userSelect: 'none' }}>
-          <Grid container>
-          </Grid>
-          <Grid container direction="row" width="100%">
-            <Grid size={4}>
-              <Input type='file' inputProps={{ accept: '.nes'}} onChange={fileOnChange} />
-            </Grid>
-            <Grid size={1}>
-            </Grid>
-            <Grid size={2}>
-              <Button variant='outlined' onClick={resetOnClick}>Reset</Button>
-            </Grid>
-            <Grid size={1} marginRight="-2vw">
-              <VolumeUp color="primary" />
-            </Grid>
-            <Grid size={3}>
-              <Slider id="volumeSlider" min={0} max={1} step={0.1} value={volume} onChange={volumeOnChange}></Slider>
-            </Grid>
-            <Grid size={1} display={"flex"} style={{ marginLeft: '1vw' }}>
-              <IconButton color="primary" disabled={gamepadDetected} onClick={handleOpenKB}>
-                <Keyboard fontSize="large" />
-              </IconButton>
-              <IconButton color="primary" disabled={!gamepadDetected} onClick={handleOpenGP}>
-                <FontAwesomeIcon icon={faGamepad as IconProp} />
-              </IconButton>
-            </Grid>
-          </Grid>
-          <Grid container>
-            <Grid>
-              <Box sx={{ position: 'relative', display: 'inline-block', height: '75vh',
-                  border: '0px solid #711521', aspectRatio: 16 / 15 }}>
-                <canvas id="canvas" width="256" height="240" style={{ width: '100%'}}> </canvas>
+        <Container>
+          <Main open={!aboutReactNesOpened}>
+            <Grid container direction="column" columns={24} spacing={3} justifyContent="center" alignItems="center" margin="auto"
+                style={{ userSelect: 'none' }}>
+              <Grid container>
+              </Grid>
+              <Grid container direction="row">
+                <Grid size={8}>
+                  <Input type='file' inputProps={{ accept: '.nes'}} onChange={fileOnChange} />
+                </Grid>
+                <Grid size={1}>
+                </Grid>
+                <Grid size={3}>
+                  <Button variant='outlined' onClick={resetOnClick}>Reset</Button>
+                </Grid>
+                <Grid size={1}>
+                </Grid>
+                <Grid size={1} sx={{ marginRight: '-0.0em', verticalAlign: 'middle' }}>
+                  <VolumeUp color="primary" />
+                </Grid>
+                <Grid size={5}>
+                  <Slider id="volumeSlider" min={0} max={1} step={0.1} value={volume} onChange={volumeOnChange}></Slider>
+                </Grid>
+                <Grid size={2} display={"flex"} style={{ marginLeft: '1vw' }}>
+                  <IconButton color="primary" disabled={gamepadDetected} onClick={handleOpenKB}>
+                    <Keyboard fontSize="large" />
+                  </IconButton>
+                  <IconButton color="primary" disabled={!gamepadDetected} onClick={handleOpenGP}>
+                    <FontAwesomeIcon icon={faGamepad as IconProp} />
+                  </IconButton>
+                </Grid>
+              </Grid>
+              <Grid container>
+                <Grid>
+                  <Box sx={{ position: 'relative', display: 'inline-block', height: '75vh',
+                      border: '0px solid #711521', aspectRatio: 16 / 15 }}>
+                    <canvas id="canvas" width="256" height="240" style={{ width: '100%'}}> </canvas>
 
-                <Box className="center" sx={{ display: gameStarted ? 'none' : 'flex', flexDirection: 'column',
-                    alignItems: 'center', justifyContent: 'center' }}
-                >
-                  <Box component="p"> Press <Box component="span" color="red">START DEMO</Box> or Choose a <Box component="span" color="red">NES ROM</Box></Box>
-                  <Button variant="contained" onClick={startDemo}>Start DEMO</Button>
-                  <Box component="img" src={`${process.env.PUBLIC_URL}/images/Tetramino.jpg`}
-                      sx={{ height: '45vh', aspectRatio: 16 /15, marginTop: '3vh', marginBottom: '-2vh' }}>
+                    <Box className="center" sx={{ display: gameStarted ? 'none' : 'flex', flexDirection: 'column',
+                        alignItems: 'center', justifyContent: 'center' }}
+                    >
+                      <Box component="p"> Press <Box component="span" color="red">START DEMO</Box> or Choose a <Box component="span" color="red">NES ROM</Box></Box>
+                      <Button variant="contained" onClick={startDemo}>Start DEMO</Button>
+                      <Box component="img" src={`${process.env.PUBLIC_URL}/images/Tetramino.jpg`}
+                          sx={{ height: '45vh', aspectRatio: 16 /15, marginTop: '3vh', marginBottom: '-2vh' }}>
+                      </Box>
+                      <Box component="p"><Box component="b" sx={{ textDecoration: 'underline', margin: '0 10px 0 5px' }}>About Demo</Box><Box component="span" color="red">Tetramino</Box> is a public-domain, Tetris-like game developed by Damian Yerrick and distributed under the <Link rel="noopener noreferrer" target="_blank" href="https://www.gnu.org/licenses/gpl-3.0.txt">GPL</Link> license.</Box>
+                    </Box>
+
                   </Box>
-                  <Box component="p"><Box component="b" sx={{ textDecoration: 'underline', margin: '0 10px 0 5px' }}>About Demo</Box><Box component="span" color="red">Tetramino</Box> is a public-domain, Tetris-like game developed by Damian Yerrick and distributed under the <Link rel="noopener noreferrer" target="_blank" href="https://www.gnu.org/licenses/gpl-3.0.txt">GPL</Link> license.</Box>
-                </Box>
-
-              </Box>
+                </Grid>
+              </Grid>
             </Grid>
-          </Grid>
-        </Grid>
+          </Main>
+
+          <IconButton onClick={handleToggleDrawer} color="default" size="large" sx={{ position: 'fixed', top: 0, right: 0, zIndex: 9999 }}>
+              {aboutReactNesOpened ? <KeyboardDoubleArrowRight/> : <KeyboardDoubleArrowLeft />}
+          </IconButton>
+          <Drawer open={aboutReactNesOpened} variant="persistent" anchor="right"
+              PaperProps={{ sx: { scrollbarWidth: 'thin', width: '50vw', backgroundColor: '#eaeaea' }}}>
+            <AboutReactNes />
+          </Drawer>
+
+        </Container>
 
         <Modal open={keyboardModal} onClose={handleCloseKB}
             style={{ width: '50vw', height: '80vh', margin: 'auto' }}

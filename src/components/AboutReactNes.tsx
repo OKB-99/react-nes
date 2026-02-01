@@ -8,7 +8,7 @@ const imgSize = {
 
 const AboutReactNes: React.FC = () => {
   return (
-    <Box sx={{ maxHeight: '100vh', caretColor: 'transparent' }}>
+    <Box sx={{ maxHeight: '100vh', caretColor: 'transparent', padding: '10px' }}>
       <Stack direction="column" spacing={2}>
         <Box component="h3">React NES - Lightweight Famicom Emulator</Box>
 
