@@ -15,9 +15,13 @@ const GamepadModal = () => {
   let gamepadMap: GamepadMap = JSON.parse(localStorage.getItem('gamepad-map'));
 
   const [buttonsStats, setButtonsStats] = useState(navigator.getGamepads()[0].buttons.map(button => button.pressed));
+  const [axesIsActive, setAxesIsActive] = useState(false);
   const intervalRef = useRef(undefined as NodeJS.Timer | undefined);
 
   useEffect(() => {
+
+    const gamepad = navigator.getGamepads()[0];
+    setAxesIsActive(gamepad.axes && gamepad.axes.length > 1);
 
     intervalRef.current = setInterval(() => {
       setButtonsStats(navigator.getGamepads()[0].buttons.map(button => button.pressed));
@@ -26,7 +30,7 @@ const GamepadModal = () => {
     return () =>  {
       clearInterval(intervalRef.current);
     };
-  })
+  }, []);
 
   return (
     <>
@@ -93,19 +97,35 @@ const GamepadModal = () => {
                   </TableRow>
                   <TableRow>
                     <TableCell align="right" size="small"><ArrowBack fontSize='small'/></TableCell>
-                    <TableCell align="right" size="small"><ArrowBack fontSize='small'/></TableCell>
+                    {axesIsActive ? <TableCell align="right" size="small"><ArrowBack fontSize='small'/></TableCell> :
+                      <CommandTextField
+                          ctrlKey={'LEFT'} controller={'gamepad'} defaultValue={gamepadMap.LEFT} controllerMap={gamepadMap}
+                      />
+                    }
                   </TableRow>
                   <TableRow>
                     <TableCell align="right" size="small"><ArrowUpward fontSize='small'/></TableCell>
-                    <TableCell align="right" size="small"><ArrowUpward fontSize='small'/></TableCell>
+                    {axesIsActive ? <TableCell align="right" size="small"><ArrowUpward fontSize='small'/></TableCell> :
+                      <CommandTextField
+                          ctrlKey={'UP'} controller={'gamepad'} defaultValue={gamepadMap.UP} controllerMap={gamepadMap}
+                      />
+                    }
                   </TableRow>
                   <TableRow>
                     <TableCell align="right" size="small"><ArrowForward fontSize='small'/></TableCell>
-                    <TableCell align="right" size="small"><ArrowForward fontSize='small'/></TableCell>
+                    {axesIsActive ? <TableCell align="right" size="small"><ArrowForward fontSize='small'/></TableCell> :
+                      <CommandTextField
+                          ctrlKey={'RIGHT'} controller={'gamepad'} defaultValue={gamepadMap.RIGHT} controllerMap={gamepadMap}
+                      />
+                    }
                   </TableRow>
                   <TableRow>
                     <TableCell align="right" size="small"><ArrowDownward fontSize='small'/></TableCell>
-                    <TableCell align="right" size="small"><ArrowDownward fontSize='small'/></TableCell>
+                    {axesIsActive ? <TableCell align="right" size="small"><ArrowDownward fontSize='small'/></TableCell> :
+                      <CommandTextField
+                          ctrlKey={'DOWN'} controller={'gamepad'} defaultValue={gamepadMap.DOWN} controllerMap={gamepadMap}
+                      />
+                    }
                   </TableRow>
               </TableBody>
             </Table>

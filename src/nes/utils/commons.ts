@@ -42,7 +42,7 @@ export class Memory implements RAM, ROM {
 export type MapperType = 'NROM' | 'UXROM' | 'MMC1' | 'CNROM' | 'MMC3' | 'AOROM' |
     'COLORDREAMS' | 'COLORDREAMS46' | 'GNROM';
 
-export type CtrlKey = 'A' | 'B' | 'SELECT' | 'START';
+export type CtrlKey = 'A' | 'B' | 'SELECT' | 'START' | 'UP' | 'RIGHT' | 'DOWN' | 'LEFT';
 
 export type KeyboardKey = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' |
     'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';
@@ -101,4 +101,8 @@ export interface GamepadMap {
   B: number;
   SELECT: number;
   START: number;
+  UP?: number;
+  RIGHT?: number;
+  DOWN?: number;
+  LEFT?: number;
 }

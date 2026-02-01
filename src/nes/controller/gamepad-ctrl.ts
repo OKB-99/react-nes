@@ -12,7 +12,14 @@ export class GamepadCtrl implements Controller {
   private idxButtonStart: number;
   private idxButtonSelect: number;
 
+  private axesIsActive = false;
+  private idxButtonUp: number;
+  private idxButtonDown: number;
+  private idxButtonLeft: number;
+  private idxButtonRight: number;
+
   constructor(nesConfig: NesConfig) {
+
     //console.log("Gamepad controller initialized");
     this.interval = setInterval(() => this.readButtons(), 1000/FRAME_RATE);
 
@@ -24,6 +31,7 @@ export class GamepadCtrl implements Controller {
         SELECT: 2,
         START: 3
       };
+
       localStorage.setItem('gamepad-map', JSON.stringify(gamepadMap));
     }
 
@@ -114,11 +122,22 @@ export class GamepadCtrl implements Controller {
   }
 
   private updateButtonMap() {
+    const gamepad = navigator.getGamepads()[0];
+    this.axesIsActive = gamepad.axes && gamepad.axes.length > 1;
+
     const sGamepadMap = localStorage.getItem('gamepad-map');
     const gamepadMap = JSON.parse(sGamepadMap);
     this.idxButtonA = gamepadMap.A;
     this.idxButtonB = gamepadMap.B;
     this.idxButtonStart = gamepadMap.START;
     this.idxButtonSelect = gamepadMap.SELECT;
+
+    if (!this.axesIsActive) {
+      const maxButtonsLength = gamepad.buttons.length;
+      this.idxButtonUp = gamepadMap.UP ?? maxButtonsLength - 4;
+      this.idxButtonRight = gamepadMap.RIGHT ?? maxButtonsLength - 3;
+      this.idxButtonDown = gamepadMap.DOWN ?? maxButtonsLength - 2;
+      this.idxButtonLeft = gamepadMap.LEFT ?? maxButtonsLength - 1;
+    }
   }
 }
