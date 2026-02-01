@@ -163,7 +163,7 @@ const App: React.FC = () => {
         </Grid>
 
         <Modal open={keyboardModal} onClose={handleCloseKB}
-            style={{ width: '50vw', height: '70vh', margin: 'auto' }}
+            style={{ width: '50vw', height: '80vh', margin: 'auto' }}
             sx={{ '& .MuiGrid-container': { background: 'white' } }}>
           <KeyboardModal></KeyboardModal>
         </Modal>
