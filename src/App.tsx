@@ -151,12 +151,18 @@ const App: React.FC = () => {
           </Grid>
           <Grid container>
             <Grid>
-              <Box sx={{ position: 'relative', display: 'inline-block' }}>
-                <canvas id="canvas" width="256" height="240"
-                    style={{ height: '75vh', border: '0px solid #711521', aspectRatio: 16 / 15 }}></canvas>
-                <Button variant="contained" onClick={startDemo}
-                    sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
-                        display: gameStarted ? 'none' : 'block' }} >Start DEMO</Button>
+              <Box sx={{ position: 'relative', display: 'inline-block', height: '75vh',
+                  border: '0px solid #711521', aspectRatio: 16 / 15 }}>
+                <canvas id="canvas" width="256" height="240" style={{ width: '100%'}}> </canvas>
+
+                <Box className="center" maxWidth="50vh"
+                  sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2 }}
+                >
+                  <Box component="p">Chose a <Box component="span" color="red">NES ROM</Box> or Press <Box component="span" color="red">START DEMO</Box></Box>
+                  <Button variant="contained" onClick={startDemo} sx={{ display: gameStarted ? 'none' : 'block' }} >Start DEMO</Button>
+                  <Box component="p">About Demo: Tetramino was developed by Damian Yerrick and is published under the GPL license.</Box>
+                </Box>
+
               </Box>
             </Grid>
           </Grid>

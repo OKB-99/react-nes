@@ -37,6 +37,13 @@
   }
 }
 
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 /* GamepadModal */
 .circle {
   margin: 0.5vw;
