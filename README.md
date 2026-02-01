@@ -4,9 +4,7 @@
 
 This project focuses on clean architecture, incremental mapper support, and a clear visualization of emulator capabilities.
 
-<img src="./public/images/Super_Mario_Bros.jpg" alt="Super Mario Bros" width="256" height="240">
-&emsp;&emsp;<img src="./public/images/Tetris.jpg" alt="Tengen's Tetris" width="256" height="240">
-&emsp;&emsp;<img src="./public/images/Gradius.jpg" alt="Gradius" width="256" height="240">
+<img src="./public/images/three_games.png" alt="Super Mario Bros, Tengen's Tetris and Gradius" width="850" height="240">
 
 **Live Demo**: https://okb-99.github.io/react-nes/
 
