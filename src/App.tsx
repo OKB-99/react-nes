@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Grid, Input, Button, Slider, IconButton, Modal, Box } from '@mui/material';
+import { Grid, Input, Button, Slider, IconButton, Modal, Box, Link } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { VolumeUp, Keyboard } from '@mui/icons-material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -155,12 +155,15 @@ const App: React.FC = () => {
                   border: '0px solid #711521', aspectRatio: 16 / 15 }}>
                 <canvas id="canvas" width="256" height="240" style={{ width: '100%'}}> </canvas>
 
-                <Box className="center" maxWidth="50vh"
-                  sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2 }}
+                <Box className="center" sx={{ display: gameStarted ? 'none' : 'flex', flexDirection: 'column',
+                    alignItems: 'center', justifyContent: 'center' }}
                 >
-                  <Box component="p">Chose a <Box component="span" color="red">NES ROM</Box> or Press <Box component="span" color="red">START DEMO</Box></Box>
-                  <Button variant="contained" onClick={startDemo} sx={{ display: gameStarted ? 'none' : 'block' }} >Start DEMO</Button>
-                  <Box component="p">About Demo: Tetramino was developed by Damian Yerrick and is published under the GPL license.</Box>
+                  <Box component="p"> Press <Box component="span" color="red">START DEMO</Box> or Choose a <Box component="span" color="red">NES ROM</Box></Box>
+                  <Button variant="contained" onClick={startDemo}>Start DEMO</Button>
+                  <Box component="img" src={`${process.env.PUBLIC_URL}/images/Tetramino.jpg`}
+                      sx={{ height: '45vh', aspectRatio: 16 /15, marginTop: '3vh', marginBottom: '-2vh' }}>
+                  </Box>
+                  <Box component="p"><Box component="b" sx={{ textDecoration: 'underline', margin: '0 10px 0 5px' }}>About Demo</Box><Box component="span" color="red">Tetramino</Box> is a public-domain, Tetris-like game developed by Damian Yerrick and distributed under the <Link rel="noopener noreferrer" target="_blank" href="https://www.gnu.org/licenses/gpl-3.0.txt">GPL</Link> license.</Box>
                 </Box>
 
               </Box>
