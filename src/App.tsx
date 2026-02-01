@@ -1,18 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Grid, Input, Button, Slider, IconButton, Modal, Box, Link, Container, Drawer, Collapse } from '@mui/material';
+import React, { lazy, Suspense, useEffect, useRef, useState } from 'react';
+import { Grid, Input, Button, Slider, IconButton, Modal, Box, Link, Container, Drawer, Collapse, CircularProgress } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { VolumeUp, Keyboard, KeyboardDoubleArrowLeft, KeyboardDoubleArrowRight } from '@mui/icons-material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faGamepad } from '@fortawesome/fontawesome-free-solid';
 import { NES } from './nes/nes';
-import KeyboardModal from './components/KeyboardModal';
 import { NesConfig } from './nes/nes-config';
-import GamepadModal from './components/GamepadModal';
 import { GamepadCtrl } from './nes/controller/gamepad-ctrl';
 import { KeypadCtrl } from './nes/controller/keypad-ctrl';
 import AboutReactNes from './components/AboutReactNes';
 import Main from './components/Main';
+
+const KeyboardModal = lazy(() => import('./components/KeyboardModal'));
+const GamepadModal = lazy(() => import('./components/GamepadModal'));
 
 const theme = createTheme({
   palette: {
@@ -164,7 +165,7 @@ const App: React.FC = () => {
                 <Grid>
                   <Box sx={{ position: 'relative', display: 'inline-block', height: '75vh',
                       border: '0px solid #711521', aspectRatio: 16 / 15 }}>
-                    <canvas id="canvas" width="256" height="240" style={{ width: '100%'}}> </canvas>
+                    <canvas id="canvas" width="256" height="240" style={{ width: '100%', display: gameStarted ? 'flex': 'none' }}> </canvas>
 
                     <Box className="center" sx={{ display: gameStarted ? 'none' : 'flex', flexDirection: 'column',
                         alignItems: 'center', justifyContent: 'center' }}
@@ -193,17 +194,34 @@ const App: React.FC = () => {
 
         </Container>
 
-        <Modal open={keyboardModal} onClose={handleCloseKB}
-            style={{ width: '50vw', height: '80vh', margin: 'auto' }}
-            sx={{ '& .MuiGrid-container': { background: 'white' } }}>
-          <KeyboardModal></KeyboardModal>
+        <Modal open={keyboardModal} onClose={handleCloseKB} style={{ width: '50%', height: '50%', margin: 'auto' }} >
+          <Box tabIndex={-1} sx={{ backgroundColor: 'white' }}>
+            <Suspense
+              fallback={
+                <Box display="flex" justifyContent="center" alignItems="center" height="100%">
+                  <CircularProgress />
+                </Box>
+              }
+            >
+              {keyboardModal && <KeyboardModal />}
+            </Suspense>
+          </Box>
         </Modal>
 
-        <Modal open={gamepadModal} onClose={handleCloseGP}
-            style={{ width: '50vw', height: '80vh', margin: 'auto' }}
-            sx={{ '& .MuiGrid-container': { background: 'white' } }}>
-          <GamepadModal></GamepadModal>
+        <Modal open={gamepadModal} onClose={handleCloseGP} style={{ width: '50%', height: '80%', margin: 'auto' }} >
+          <Box tabIndex={-1} sx={{ backgroundColor: 'white' }} >
+            <Suspense
+              fallback={
+                <Box display="flex" justifyContent="center" alignItems="center" height="100%">
+                  <CircularProgress />
+                </Box>
+              }
+            >
+              {gamepadModal && <GamepadModal />}
+            </Suspense>
+          </Box>
         </Modal>
+
       </ThemeProvider>
     </>
   );
