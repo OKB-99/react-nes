@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Grid, Input, Button, Slider, IconButton, Modal } from '@mui/material';
+import { Grid, Input, Button, Slider, IconButton, Modal, Box } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { VolumeUp, Keyboard } from '@mui/icons-material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -25,6 +25,7 @@ const App: React.FC = () => {
   const nesConfig = useRef(new NesConfig());
   const [ volume, setVolume ] = useState(parseFloat(localStorage.getItem('nes-audio-volume') || '0.5'));
   const [ gamepadDetected, setGamepadDetacted ] = useState(false);
+  const [ gameStarted, setGameStarted ] = useState(false);
 
   useEffect(() => {
     // Load volume from session storage
@@ -47,19 +48,21 @@ const App: React.FC = () => {
       nesConfig.current.controller1 = new KeypadCtrl(nesConfig.current);
       setGamepadDetacted(false);
     });
+  }, []);
 
-    // Load the initial ROM
-    const initialRomFile = 'Tetramino.nes';
-    fetch(`${process.env.PUBLIC_URL}/roms/${initialRomFile}`).then(
+  const startDemo = () => {
+    // Load the demo ROM
+    const demoRomFile = 'Tetramino.nes';
+    fetch(`${process.env.PUBLIC_URL}/roms/${demoRomFile}`).then(
       response => response.blob().then(blob => {
-        const file = new File([blob], initialRomFile)
+        const file = new File([blob], demoRomFile)
         const event = {
           target: { files: [file] }
         } as unknown as React.ChangeEvent<HTMLInputElement>;
         fileOnChange(event);
       })
     );
-  }, []);
+  };
 
   const resetOnClick = () => {
     nes.current?.cpuReset();
@@ -89,6 +92,7 @@ const App: React.FC = () => {
         }
 
         nes.current = new NES(buffer, nesConfig.current);
+        setGameStarted(true);
       });
   }
 
@@ -147,20 +151,25 @@ const App: React.FC = () => {
           </Grid>
           <Grid container>
             <Grid>
-              <canvas id="canvas" width="256" height="240"
-                  style={{ height: '75vh', border: '0px solid #711521', aspectRatio: 16 / 15 }}></canvas>
+              <Box sx={{ position: 'relative', display: 'inline-block' }}>
+                <canvas id="canvas" width="256" height="240"
+                    style={{ height: '75vh', border: '0px solid #711521', aspectRatio: 16 / 15 }}></canvas>
+                <Button variant="contained" onClick={startDemo}
+                    sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
+                        display: gameStarted ? 'none' : 'block' }} >Start DEMO</Button>
+              </Box>
             </Grid>
           </Grid>
         </Grid>
 
         <Modal open={keyboardModal} onClose={handleCloseKB}
-            style={{ width: '50%', height: '70%', margin: 'auto' }}
+            style={{ width: '50vw', height: '70vh', margin: 'auto' }}
             sx={{ '& .MuiGrid-container': { background: 'white' } }}>
           <KeyboardModal></KeyboardModal>
         </Modal>
 
         <Modal open={gamepadModal} onClose={handleCloseGP}
-            style={{ width: '50%', height: '80%', margin: 'auto' }}
+            style={{ width: '50vw', height: '80vh', margin: 'auto' }}
             sx={{ '& .MuiGrid-container': { background: 'white' } }}>
           <GamepadModal></GamepadModal>
         </Modal>
