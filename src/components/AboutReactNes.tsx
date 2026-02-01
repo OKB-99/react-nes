@@ -1,4 +1,5 @@
 import { Box, Link, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { GitHub } from "@mui/icons-material";
 import { INesMappers } from "./INesMappers";
 
 const imgSize = {
@@ -10,7 +11,16 @@ const AboutReactNes: React.FC = () => {
   return (
     <Box sx={{ maxHeight: '100vh', caretColor: 'transparent', padding: '10px' }}>
       <Stack direction="column" spacing={2}>
-        <Box component="h3">React NES - Lightweight Famicom Emulator</Box>
+        {/* Title + GitHub Link */}
+        <Stack direction="row" spacing={1} alignItems="center" justifyContent="space-around">
+          <Box component="h3" sx={{ margin: 0 }}>React NES - Lightweight Famicom Emulator</Box>
+          <Box component="span" sx={{ display: 'flex', alignItems: 'center', gap: 0.5, }}>
+            <GitHub fontSize="small" />
+            <Link href="https://github.com/OKB-99/react-nes" target="_blank" rel="noopener noreferrer" underline="hover" >
+              GitHub
+            </Link>
+          </Box>
+        </Stack>
 
         <Box component="p">A lightweight Nintendo Entertainment System (NES) emulator built with TypeScript and React, designed for accuracy, performance, and simplicity. This project emulates the original NES hardware, allowing classic iNES-format (.nes) ROMs to run directly in a web browser.</Box>
 
