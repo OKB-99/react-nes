@@ -55,10 +55,10 @@ export class GamepadCtrl implements Controller {
       this.nesConfig.updateGamepadMap = false;
     }
 
-    if (gamepad.axes[0] < -0.5) {
+    if ((this.axesIsActive && gamepad.axes[0] < -0.5) || gamepad.buttons[this.idxButtonLeft].pressed) {
       this.keyStatus |= (1 << 6); // Left
       this.keyStatus &= ~(1 << 7);
-    } else if (gamepad.axes[0] > 0.5) {
+    } else if ((this.axesIsActive && gamepad.axes[0] > 0.5) || gamepad.buttons[this.idxButtonRight].pressed) {
       this.keyStatus |= (1 << 7); // Right
       this.keyStatus &= ~(1 << 6);
     } else {
@@ -66,11 +66,11 @@ export class GamepadCtrl implements Controller {
       this.keyStatus &= ~(1 << 7);
     }
 
-    if (gamepad.axes[1] < -0.5) {
-      this.keyStatus |= (1 << 4); // Down
+    if ((this.axesIsActive && gamepad.axes[1] < -0.5) || gamepad.buttons[this.idxButtonUp].pressed) {
+      this.keyStatus |= (1 << 4); // Up
       this.keyStatus &= ~(1 << 5);
-    } else if (gamepad.axes[1] > 0.5) {
-      this.keyStatus |= (1 << 5); // Up
+    } else if ((this.axesIsActive && gamepad.axes[1] > 0.5) || gamepad.buttons[this.idxButtonDown].pressed) {
+      this.keyStatus |= (1 << 5); // Down
       this.keyStatus &= ~(1 << 4);
     } else {
       this.keyStatus &= ~(1 << 5);

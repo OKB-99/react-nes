@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import '../App.css';
 import { ArrowBack, ArrowUpward, ArrowForward, ArrowDownward } from '@mui/icons-material';
 import CommandTextField from './CommandTextField';
+import { isPropertyAccessOrQualifiedName } from 'typescript';
 
 
 /**
@@ -44,13 +45,24 @@ const GamepadModal = () => {
         <Grid container direction="row">
           <Box>
             <Box>
-              <Box component="span" sx={{ padding: '0 10px' }}>Gamepad Buttons Test</Box>
+              <Box component="span" sx={{ padding: '0 10px' }}>Gamepad Buttons Test (Press any button)</Box>
             </Box>
+
+            {/* First 12 buttons */}
             <Box display="flex">
-              {buttonsStats.map((pressed, id) =>
+              {buttonsStats.filter((pressed, id) => id < 12).map((pressed, id) =>
                   <Box key={id} className={'circle' + (pressed ? ' circle-pressed' : '')}>{id}</Box>
               )}
             </Box>
+
+            {/* Remaining buttons if exist */}
+            {buttonsStats.length > 12 &&
+              <Box display="flex">
+                {buttonsStats.filter((pressed, id) => id >= 12).map((pressed, id) =>
+                    <Box key={id + 12} className={'circle' + (pressed ? ' circle-pressed' : '')}>{id + 12}</Box>
+                )}
+              </Box>
+            }
           </Box>
         </Grid>
         <Grid container>
@@ -97,35 +109,43 @@ const GamepadModal = () => {
                   </TableRow>
                   <TableRow>
                     <TableCell align="right" size="small"><ArrowBack fontSize='small'/></TableCell>
-                    {axesIsActive ? <TableCell align="right" size="small"><ArrowBack fontSize='small'/></TableCell> :
+                    <TableCell align="right" size="small">
+                    {axesIsActive ?<ArrowBack fontSize='small'/> :
                       <CommandTextField
                           ctrlKey={'LEFT'} controller={'gamepad'} defaultValue={gamepadMap.LEFT} controllerMap={gamepadMap}
                       />
                     }
+                    </TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell align="right" size="small"><ArrowUpward fontSize='small'/></TableCell>
-                    {axesIsActive ? <TableCell align="right" size="small"><ArrowUpward fontSize='small'/></TableCell> :
+                    <TableCell align="right" size="small">
+                    {axesIsActive ? <ArrowUpward fontSize='small'/> :
                       <CommandTextField
                           ctrlKey={'UP'} controller={'gamepad'} defaultValue={gamepadMap.UP} controllerMap={gamepadMap}
                       />
                     }
+                    </TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell align="right" size="small"><ArrowForward fontSize='small'/></TableCell>
-                    {axesIsActive ? <TableCell align="right" size="small"><ArrowForward fontSize='small'/></TableCell> :
+                    <TableCell align="right" size="small">
+                    {axesIsActive ? <ArrowForward fontSize='small'/> :
                       <CommandTextField
                           ctrlKey={'RIGHT'} controller={'gamepad'} defaultValue={gamepadMap.RIGHT} controllerMap={gamepadMap}
                       />
                     }
+                    </TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell align="right" size="small"><ArrowDownward fontSize='small'/></TableCell>
-                    {axesIsActive ? <TableCell align="right" size="small"><ArrowDownward fontSize='small'/></TableCell> :
+                    <TableCell align="right" size="small">
+                    {axesIsActive ? <ArrowDownward fontSize='small'/> :
                       <CommandTextField
                           ctrlKey={'DOWN'} controller={'gamepad'} defaultValue={gamepadMap.DOWN} controllerMap={gamepadMap}
                       />
                     }
+                    </TableCell>
                   </TableRow>
               </TableBody>
             </Table>
