@@ -36,3 +36,29 @@
     transform: rotate(360deg);
   }
 }
+
+.center {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  transform: translate(-5%, -5%);
+}
+
+/* GamepadModal */
+.circle {
+  margin: 0.5vw;
+  width: 2vw;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background-color: #711521;
+  border: 3px solid black;/* Optional border */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.circle-pressed {
+  background-color: red;
+}
