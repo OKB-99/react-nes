@@ -55,10 +55,12 @@ export class GamepadCtrl implements Controller {
       this.nesConfig.updateGamepadMap = false;
     }
 
-    if ((this.axesIsActive && gamepad.axes[0] < -0.5) || gamepad.buttons[this.idxButtonLeft].pressed) {
+    if ((this.axesIsActive && gamepad.axes[0] < -0.5) ||
+        (!this.axesIsActive && gamepad.buttons[this.idxButtonLeft].pressed)) {
       this.keyStatus |= (1 << 6); // Left
       this.keyStatus &= ~(1 << 7);
-    } else if ((this.axesIsActive && gamepad.axes[0] > 0.5) || gamepad.buttons[this.idxButtonRight].pressed) {
+    } else if ((this.axesIsActive && gamepad.axes[0] > 0.5) ||
+               (!this.axesIsActive && gamepad.buttons[this.idxButtonRight].pressed)) {
       this.keyStatus |= (1 << 7); // Right
       this.keyStatus &= ~(1 << 6);
     } else {
@@ -66,10 +68,12 @@ export class GamepadCtrl implements Controller {
       this.keyStatus &= ~(1 << 7);
     }
 
-    if ((this.axesIsActive && gamepad.axes[1] < -0.5) || gamepad.buttons[this.idxButtonUp].pressed) {
+    if ((this.axesIsActive && gamepad.axes[1] < -0.5) ||
+        (!this.axesIsActive && gamepad.buttons[this.idxButtonUp].pressed)) {
       this.keyStatus |= (1 << 4); // Up
       this.keyStatus &= ~(1 << 5);
-    } else if ((this.axesIsActive && gamepad.axes[1] > 0.5) || gamepad.buttons[this.idxButtonDown].pressed) {
+    } else if ((this.axesIsActive && gamepad.axes[1] > 0.5) ||
+               (!this.axesIsActive && gamepad.buttons[this.idxButtonDown].pressed)) {
       this.keyStatus |= (1 << 5); // Down
       this.keyStatus &= ~(1 << 4);
     } else {
