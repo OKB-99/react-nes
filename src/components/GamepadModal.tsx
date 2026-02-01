@@ -1,6 +1,6 @@
-import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, TextField, Input, Box, Grid } from '@mui/material';
+import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Box, Grid } from '@mui/material';
 import { GamepadMap } from '../nes/utils/commons';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import '../App.css';
 import { ArrowBack, ArrowUpward, ArrowForward, ArrowDownward } from '@mui/icons-material';
 import CommandTextField from './CommandTextField';
@@ -34,7 +34,7 @@ const GamepadModal = () => {
         <Grid container direction="row">
         <Box component="p">
           <Box component="span" sx={{ fontSize: '1.17em', fontWeight: 'bold', padding: '0 10px'}}>Gamepad Configuration</Box>
-          <Box component="span">*A page reload may be necessary after configuration.</Box>
+          <Box component="span">*A page reload is necessary after configuration.</Box>
         </Box>
         </Grid>
         <Grid container direction="row">
@@ -50,7 +50,7 @@ const GamepadModal = () => {
           </Box>
         </Grid>
         <Grid container>
-          <TableContainer component={Paper}>
+          <TableContainer>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
                 <TableRow>

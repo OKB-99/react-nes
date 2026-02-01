@@ -1,6 +1,5 @@
-import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, TextField, Input, Grid, Box, Container } from '@mui/material';
-import { KeyboardKey, KeyboardMap } from '../nes/utils/commons';
-import React from 'react';
+import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Grid, Box } from '@mui/material';
+import { KeyboardMap } from '../nes/utils/commons';
 import { ArrowBack, ArrowUpward, ArrowForward, ArrowDownward } from '@mui/icons-material';
 import CommandTextField from './CommandTextField';
 
@@ -16,11 +15,11 @@ const KeyboardModal = () => {
         <Grid container direction="row">
         <Box component="p">
           <Box component="span" sx={{ fontSize: '1.17em', fontWeight: 'bold', padding: '0 10px'}}>Keyboard Configuration</Box>
-          <Box component="span" fontSize={'0.8em'}>*A page reload may be necessary after configuration.</Box>
+          <Box component="span" fontSize={'0.8em'}>*A page reload is necessary after configuration.</Box>
         </Box>
         </Grid>
         <Grid container direction="row">
-          <TableContainer component={Paper}>
+          <TableContainer>
             <Table aria-label="simple table">
               <TableHead>
                 <TableRow>
