@@ -9,15 +9,6 @@ const KeyboardModal = () => {
 
   let keyboardMap: KeyboardMap = JSON.parse(localStorage.getItem('keyboard-map'));
 
-  const updateKeyboardMap = (key: keyof KeyboardMap ) => (env: React.FocusEvent<HTMLInputElement>) => {
-    keyboardMap[key] = (env.target.value as string).toUpperCase() as KeyboardKey;
-    localStorage.setItem('keyboard-map', JSON.stringify(keyboardMap));
-  }
-
-  const onInput = (key: keyof KeyboardMap ) => (env: React.FocusEvent<HTMLInputElement>) => {
-    env.target.value = (env.target.value as string).toUpperCase();
-  }
-
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'center', margin: 'auto' }}>

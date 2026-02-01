@@ -14,11 +14,6 @@ const GamepadModal = () => {
 
   let gamepadMap: GamepadMap = JSON.parse(localStorage.getItem('gamepad-map'));
 
-  const updateGamepadMap = (buttonId: keyof GamepadMap ) => (env: React.FocusEvent<HTMLInputElement>) => {
-    gamepadMap[buttonId] = parseInt(env.target.value);
-    localStorage.setItem('gamepad-map', JSON.stringify(gamepadMap));
-  }
-
   const [buttonsStats, setButtonsStats] = useState(navigator.getGamepads()[0].buttons.map(button => button.pressed));
   const intervalRef = useRef(undefined as NodeJS.Timer | undefined);
 
