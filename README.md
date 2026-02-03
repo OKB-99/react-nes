@@ -10,6 +10,23 @@ This project focuses on clean architecture, incremental mapper support, and a cl
 
 ---
 
+## References
+- **[NES Reference Guide (NESDev Wiki)](https://www.nesdev.org/wiki/NES_reference_guide)**
+
+  Comprehensive technical documentation covering the NES hardware architecture, CPU, PPU, memory mapping, and low-level system behavior.
+
+
+- **[NES Emulator Implementation Notes (Qiita – Japanese)](https://qiita.com/bokuweb/items/1575337bef44ae82f4d3)**
+
+  In-depth article explaining NES emulator design concepts, including CPU instruction handling, rendering flow, and implementation details. (Content in Japanese)
+
+
+- **[NES Emulator Source Code written in C (GitHub – ObaraEmmanuel)](https://github.com/ObaraEmmanuel/NES)**
+
+  Open-source NES emulator project showcasing practical implementation of NES components, useful as a reference for architecture, debugging, and development patterns.
+
+---
+
 ## Features
 
 - **Web-based NES emulation**

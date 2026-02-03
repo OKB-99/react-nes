@@ -29,7 +29,7 @@ const App: React.FC = () => {
   const [ volume, setVolume ] = useState(parseFloat(localStorage.getItem('nes-audio-volume') || '0.5'));
   const [ gamepadDetected, setGamepadDetacted ] = useState(false);
   const [ gameStarted, setGameStarted ] = useState(false);
-  const [ aboutReactNesOpened, setAboutReactNesOpened ] = useState(true);
+  const [ aboutReactNesOpened, setAboutReactNesOpened ] = useState(false);
 
   useEffect(() => {
     // Load volume from session storage
