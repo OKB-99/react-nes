@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import '../App.css';
 import { ArrowBack, ArrowUpward, ArrowForward, ArrowDownward } from '@mui/icons-material';
 import CommandTextField from './CommandTextField';
-import { isPropertyAccessOrQualifiedName } from 'typescript';
 
 
 /**

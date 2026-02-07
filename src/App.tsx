@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, useEffect, useRef, useState } from 'react';
-import { Grid, Input, Button, Slider, IconButton, Modal, Box, Link, Container, Drawer, Collapse, CircularProgress } from '@mui/material';
+import { Grid, Input, Button, Slider, IconButton, Modal, Box, Link, Container, Drawer, CircularProgress } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { VolumeUp, Keyboard, KeyboardDoubleArrowLeft, KeyboardDoubleArrowRight } from '@mui/icons-material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

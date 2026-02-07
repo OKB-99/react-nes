@@ -1,5 +1,5 @@
 import { NesConfig } from "../nes-config";
-import { Byte, GamepadMap, getKeycodeFromKey, KeyboardMap } from "../utils/commons";
+import { Byte, GamepadMap } from "../utils/commons";
 import { FRAME_RATE } from "../utils/constants";
 import { Controller } from "./controller";
 

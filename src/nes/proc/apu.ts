@@ -5,7 +5,7 @@ import { TriangleChannel } from "../audio/triangle-channel";
 import { Interrupts } from "../bus/interrupts";
 import { NesConfig } from "../nes-config";
 import { Byte, Word } from "../utils/commons";
-import { CLOCKS_PER_FRAME, CPU_CLOCKS } from "../utils/constants";
+import { CLOCKS_PER_FRAME } from "../utils/constants";
 
 export class APU {
 

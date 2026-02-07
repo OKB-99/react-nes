@@ -1,6 +1,6 @@
 import { NesConfig } from '../nes-config';
 import { Byte } from '../utils/commons';
-import { CPU_CLOCKS, FRAME_RATE } from '../utils/constants';
+import { CPU_CLOCKS } from '../utils/constants';
 import { pulse } from './pulse';
 
 export class PulseChannel {
@@ -103,7 +103,7 @@ export class PulseChannel {
     if (this.dutySequence.length === 0)
       return;
 
-    if (this.timer == 0) {
+    if (this.timer === 0) {
       this.dutyIndex = (this.dutyIndex + 1) & 7;
       this.timer = this.initTimer;
     } else {
