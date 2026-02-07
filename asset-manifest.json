@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/react-nes/static/css/main.e6c13ad2.css",
-    "main.js": "/react-nes/static/js/main.c7f3d910.js",
+    "main.js": "/react-nes/static/js/main.1110121e.js",
     "static/js/35.d9e05ba6.chunk.js": "/react-nes/static/js/35.d9e05ba6.chunk.js",
     "static/css/924.2cd14f96.chunk.css": "/react-nes/static/css/924.2cd14f96.chunk.css",
-    "static/js/924.2359e603.chunk.js": "/react-nes/static/js/924.2359e603.chunk.js",
+    "static/js/924.984b4c6c.chunk.js": "/react-nes/static/js/924.984b4c6c.chunk.js",
     "static/js/453.e19e7407.chunk.js": "/react-nes/static/js/453.e19e7407.chunk.js",
     "static/js/684.8149a1f6.chunk.js": "/react-nes/static/js/684.8149a1f6.chunk.js",
     "index.html": "/react-nes/index.html",
     "main.e6c13ad2.css.map": "/react-nes/static/css/main.e6c13ad2.css.map",
-    "main.c7f3d910.js.map": "/react-nes/static/js/main.c7f3d910.js.map",
+    "main.1110121e.js.map": "/react-nes/static/js/main.1110121e.js.map",
     "35.d9e05ba6.chunk.js.map": "/react-nes/static/js/35.d9e05ba6.chunk.js.map",
     "924.2cd14f96.chunk.css.map": "/react-nes/static/css/924.2cd14f96.chunk.css.map",
-    "924.2359e603.chunk.js.map": "/react-nes/static/js/924.2359e603.chunk.js.map",
+    "924.984b4c6c.chunk.js.map": "/react-nes/static/js/924.984b4c6c.chunk.js.map",
     "453.e19e7407.chunk.js.map": "/react-nes/static/js/453.e19e7407.chunk.js.map",
     "684.8149a1f6.chunk.js.map": "/react-nes/static/js/684.8149a1f6.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.c7f3d910.js"
+    "static/js/main.1110121e.js"
   ]
 }
