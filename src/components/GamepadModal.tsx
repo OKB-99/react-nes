@@ -39,7 +39,7 @@ const GamepadModal = () => {
         <Grid container direction="row">
         <Box component="p">
           <Box component="span" sx={{ fontSize: '1.17em', fontWeight: 'bold', padding: '0 10px'}}>Gamepad Configuration</Box>
-          <Box component="span">*A page reload is necessary after configuration.</Box>
+          <Box component="span">*A page reload may be necessary after configuration.</Box>
         </Box>
         </Grid>
         <Grid container direction="row">
