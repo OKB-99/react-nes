@@ -192,9 +192,8 @@ export class PPU {
 
     let skipPixels = this.dot < 8 ? this.x : 0;
 
-    shifterBG.forEach(pixelToPush => {
-      const bgPixel = pixelToPush;
-      this.oamCache.filter(([i, x, p, s])=> xInRange(x)).reverse().forEach(([index, x, bgPriority, shifter]) => {
+    shifterBG.forEach((pixelToPush, bgIdx) => {
+      this.oamCache.filter(([i, coordX, p, s])=> xInRange(coordX - bgIdx + 7)).reverse().forEach(([index, x, bgPriority, shifter]) => {
         const spPixel = shifter.shift() as number;
         if (bgPriority === 0 || (pixelToPush & 0x03) === 0) {
           if (spPixel & 0x03) {
@@ -405,6 +404,7 @@ export class PPU {
             const bgPriority = (spriteAttr >> 5) & 0x01;
             const flipX = !!(spriteAttr & 0x40), flipY = !!(spriteAttr & 0x80);
             const shifter = this.generateNthLineOfTile(spriteIdx, paletteId, lineN, true, flipX, flipY);
+
             if (0xF9 <= coordX) { // Checked!
               const overflowed = shifter.splice(coordX, 8 - (0xFF - coordX + 1));
               if (this.registers[1] & this.SP_LEFTCOLUMN_ENABLED) {
