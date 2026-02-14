@@ -153,11 +153,11 @@ const App: React.FC = () => {
                   <Slider id="volumeSlider" min={0} max={1} step={0.1} value={volume} onChange={volumeOnChange}></Slider>
                 </Grid>
                 <Grid size={2} display={"flex"} style={{ marginLeft: '1vw' }}>
-                  <IconButton color="primary" disabled={gamepadDetected} onClick={handleOpenKB}>
-                    <Keyboard fontSize="large" />
-                  </IconButton>
                   <IconButton color="primary" disabled={!gamepadDetected} onClick={handleOpenGP}>
                     <FontAwesomeIcon icon={faGamepad as IconProp} />
+                  </IconButton>
+                  <IconButton color="primary" disabled={gamepadDetected} onClick={handleOpenKB}>
+                    <Keyboard fontSize="large" />
                   </IconButton>
                 </Grid>
               </Grid>
