@@ -4,9 +4,10 @@
 
 This project focuses on clean architecture, incremental mapper support, and a clear visualization of emulator capabilities.
 
-<img src="./public/images/three_games.png" alt="Super Mario Bros, Tengen's Tetris and Gradius" width="850" height="240">
+**Live**: https://okb-99.github.io/react-nes/
 
-**Live Demo**: https://okb-99.github.io/react-nes/
+
+<img src="./public/images/sample1.jpg" alt="Super Mario Bros in React NES" width="670" height="640">
 
 ---
 
@@ -24,6 +25,12 @@ This project focuses on clean architecture, incremental mapper support, and a cl
 - **[NES Emulator Source Code written in C (GitHub – ObaraEmmanuel)](https://github.com/ObaraEmmanuel/NES)**
 
   Open-source NES emulator project showcasing practical implementation of NES components, useful as a reference for architecture, debugging, and development patterns.
+
+---
+
+## Test Play
+
+<img src="./public/images/three_games.png" alt="Super Mario Bros, Tengen's Tetris and Gradius" width="850" height="240">
 
 ---
 
